@@ -168,7 +168,7 @@ public class MainInterface extends JFrame implements ActionListener {
             String path = "D:\\User-Agent.txt";
             int i = 1;
             List<Offer> offerList = new ArrayList<>();
-            String allocation_id, last_allocation_id;
+            String last_allocation_id;
             List<String> Ips = new ArrayList<>();
             Offer param = new Offer();
             param.setId(Integer.valueOf(textOfferId.getText()));
@@ -176,23 +176,26 @@ public class MainInterface extends JFrame implements ActionListener {
             Random random = new Random();
             List<Offer> offers = ExcelImport.importExcelAction(filePath);
             java.util.List<String> uas = ReadTxt.readTxt(path);
-            last_allocation_id = ChangeAwsIp.bindIp2Instance(Ips);
+            last_allocation_id = ChangeAwsIp.bindIp2Instance();
+            ChangeAwsIp.describeAddresses(Ips, last_allocation_id);
             for (Offer offer : offers) {
                 int uaNumber = Math.abs(random.nextInt(uas.size()));
                 System.out.println("Fake browser access:" + uas.get(uaNumber));
                 System.out.println("Fake identity login" + offer.toString());
-//                Selenium.selenium(offer, uas.get(uaNumber), param, offerList);
-                ChangeAwsIp.freedIp(last_allocation_id);
-                allocation_id = ChangeAwsIp.bindIp2Instance(Ips);
-                last_allocation_id = allocation_id;
+                Selenium.selenium(offer, uas.get(uaNumber), param, offerList);
                 textBlock.append("IP:" + Ips.get(Ips.size() - 1));
-                textBlock.append("OfferId:" + param.getId());
-                textBlock.append("CardNumber:" + offer.getCardNumber());
-                textBlock.append("循环已经" + i++ + "次");
+                textBlock.append("     OfferId:" + param.getId());
+                textBlock.append("     CardNumber:" + offer.getCardNumber());
+                textBlock.append("     循环已经" + i++ + "次");
                 textBlock.repaint();
+                ChangeAwsIp.freedIp(last_allocation_id);
+                textBlock.append("     释放IP:" + Ips.get(Ips.size() - 1));
+                textBlock.repaint();
+                last_allocation_id = ChangeAwsIp.bindIp2Instance();
+                ChangeAwsIp.describeAddresses(Ips, last_allocation_id);
                 break;
             }
-//            ExcelImport.exportExcel(offerList, param.getTypeOffer());
+            ExcelImport.exportExcel(offerList, param.getTypeOffer());
         }
     }
 

@@ -12,7 +12,7 @@ public class ChangeAwsIp {
     /**
      * @return 返回弹性IP的分配Id
      */
-    public static String bindIp2Instance(List<String> Ips) {
+    public static String bindIp2Instance() {
         //实例的Id
         String instance_id = "i-023a94458ad80f3f0";
 
@@ -34,8 +34,6 @@ public class ChangeAwsIp {
         AssociateAddressResult associate_response =
                 ec2.associateAddress(associate_request);
 
-        Ips.add(associate_response.getAssociationId());
-
         System.out.printf(
                 "Successfully associated Elastic IP address %s " +
                         "with instance %s",
@@ -47,7 +45,7 @@ public class ChangeAwsIp {
     /**
      * 打印弹性IP的描述信息
      */
-    public static void describeAddresses(List<String> ips) {
+    public static void describeAddresses(List<String> ips, String allocation_id) {
         final AmazonEC2 ec2 = AmazonEC2ClientBuilder.defaultClient();
 
         DescribeAddressesResult response = ec2.describeAddresses();
@@ -63,6 +61,10 @@ public class ChangeAwsIp {
                     address.getAllocationId(),
                     address.getNetworkInterfaceId());
             ips.add(address.getPublicIp());
+            if (address.getAllocationId().equals(allocation_id)) {
+                ips.add(address.getPublicIp());
+                break;
+            }
         }
     }
 
