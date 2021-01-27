@@ -1,28 +1,20 @@
 package selenium.swing;
 
-import selenium.pojo.Offer;
-import selenium.untils.ChangeAwsIp;
-import selenium.untils.ExcelImport;
-import selenium.untils.ReadTxt;
-import selenium.untils.Selenium;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MainInterface extends JFrame implements ActionListener {
     JPanel jp1, jp2, jp3, jp4, jp5;     //面板
     JLabel labelTitle;      //标题
-    JLabel labelOfferId, labelURL;       //提示
+    JLabel labelOfferId, labelURL, labelBlock;       //提示
     JTextField textOfferId;                  //输入OfferId
     JTextField textOfferUrl;                            //输入OfferUrl
+    JTextArea textBlock;
     JButton buttonEnter;                        //登录按扭
 
     //构造
@@ -55,16 +47,20 @@ public class MainInterface extends JFrame implements ActionListener {
         labelTitle.setFont(fontTitle);
 
         //设置Label
-        labelOfferId = new JLabel("OfferId:");
+        labelOfferId = new JLabel("OfferId:                             ");
         labelOfferId.setFont(fontLabel);
-        labelURL = new JLabel("                 OfferUrl：                             ");
+        labelURL = new JLabel("OfferUrl：                           ");
         labelURL.setFont(fontLabel);
+        labelBlock = new JLabel("目前测试的信息:                       ");
+        labelBlock.setFont(fontLabel);
+
 
         //设置JTextField
-        textOfferId = new JTextField(10);
+        textOfferId = new JTextField(30);
         //设置JPasswordField
         textOfferUrl = new JTextField(30);
-
+        //设置白板显示信息
+        textBlock = new JTextArea(10, 30);
         //设置按钮
         buttonEnter = new JButton(" 测试开始  ");
         //设置布局
@@ -74,13 +70,18 @@ public class MainInterface extends JFrame implements ActionListener {
         jp1.add(labelTitle);
 
         jp2.add(labelOfferId);
+
         jp2.add(textOfferId);
 
-        jp2.add(labelURL);
+        jp3.add(labelURL);
 
-        jp2.add(textOfferUrl);
+        jp3.add(textOfferUrl);
 
-        jp4.add(buttonEnter);
+        jp4.add(labelBlock);
+
+        jp4.add(textBlock);
+
+        jp5.add(buttonEnter);
 
         this.add(jp1);
         this.add(jp2);
@@ -145,29 +146,30 @@ public class MainInterface extends JFrame implements ActionListener {
                     JOptionPane.WARNING_MESSAGE);
             clear();
         } else {
-            String filePath = "D:\\user.xls";
-            String path = "D:\\User-Agent.txt";
-            Offer param = new Offer();
-            param.setId(Integer.valueOf(textOfferId.getText()));
-            param.setUrl(textOfferUrl.getText());
-            Random random = new Random();
-            List<Offer> offers = ExcelImport.importExcelAction(filePath);
-            java.util.List<String> uas = ReadTxt.readTxt(path);
-            List<Offer> offerList = new ArrayList<>();
-            String allocation_id;
-            allocation_id = ChangeAwsIp.bindIp2Instance();
-            List<String> Ips = new ArrayList<>();
-            ChangeAwsIp.describeAddresses(Ips);
-            for (Offer offer : offers) {
-                int uaNumber = Math.abs(random.nextInt(uas.size()));
-                System.out.println("Fake browser access:" + uas.get(uaNumber));
-                System.out.println("Fake identity login" + offer.toString());
-                Selenium.selenium(offer, uas.get(uaNumber), param, offerList);
-                ChangeAwsIp.freedIp(allocation_id);
-                allocation_id = ChangeAwsIp.bindIp2Instance();
-                ChangeAwsIp.describeAddresses(Ips);
-            }
-            ExcelImport.exportExcel(offerList, param.getTypeOffer());
+//            String filePath = "D:\\user.xls";
+//            String path = "D:\\User-Agent.txt";
+//            Offer param = new Offer();
+//            param.setId(Integer.valueOf(textOfferId.getText()));
+//            param.setUrl(textOfferUrl.getText());
+//            Random random = new Random();
+//            List<Offer> offers = ExcelImport.importExcelAction(filePath);
+//            java.util.List<String> uas = ReadTxt.readTxt(path);
+//            List<Offer> offerList = new ArrayList<>();
+//            String allocation_id;
+//            allocation_id = ChangeAwsIp.bindIp2Instance();
+//            List<String> Ips = new ArrayList<>();
+//            for (Offer offer : offers) {
+//                int uaNumber = Math.abs(random.nextInt(uas.size()));
+//                System.out.println("Fake browser access:" + uas.get(uaNumber));
+//                System.out.println("Fake identity login" + offer.toString());
+//                Selenium.selenium(offer, uas.get(uaNumber), param, offerList);
+//                ChangeAwsIp.freedIp(allocation_id);
+//                allocation_id = ChangeAwsIp.bindIp2Instance();
+//                ChangeAwsIp.describeAddresses(Ips);
+//            }
+//            ExcelImport.exportExcel(offerList, param.getTypeOffer());
+            textBlock.append("message");
+            textBlock.paintImmediately(textBlock.getX(), textBlock.getY(), textBlock.getWidth(), textBlock.getHeight());
         }
     }
 
