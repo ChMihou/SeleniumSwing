@@ -33,7 +33,7 @@ public class MainInterface extends JFrame implements ActionListener {
         this.setResizable(false);                       //设置窗口大小不可调节
         this.setTitle("Offer测试");                       //设置窗口标题
         this.setLocationRelativeTo(null);               //在屏幕中间显示(居中显示)
-        this.setBounds(650, 240, 430, 470);
+        this.setBounds(500, 200, 600, 800);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);   //设置关闭窗口同时关闭JVM
         this.setVisible(true);                          //设置为窗口可见
     }
@@ -56,20 +56,19 @@ public class MainInterface extends JFrame implements ActionListener {
         labelTitle.setFont(fontTitle);
 
         //设置Label
-        labelOfferId = new JLabel("OfferId:                             ");
+        labelOfferId = new JLabel("OfferId:                                                     ");
         labelOfferId.setFont(fontLabel);
-        labelURL = new JLabel("OfferUrl：                           ");
+        labelURL = new JLabel("OfferUrl：                                                   ");
         labelURL.setFont(fontLabel);
-        labelBlock = new JLabel("目前测试的信息:                       ");
+        labelBlock = new JLabel("目前测试的信息:                                              ");
         labelBlock.setFont(fontLabel);
 
 
         //设置JTextField
-        textOfferId = new JTextField(30);
-        textOfferUrl = new JTextField(30);
+        textOfferId = new JTextField(50);
+        textOfferUrl = new JTextField(50);
         //设置白板显示信息
-        textBlock = new JTextArea(5, 30);
-        textBlock.setRows(10);
+        textBlock = new JTextArea(6, 50);
         //设置自动换行输出信息
         textBlock.setLineWrap(true);
         //设置按钮
@@ -93,6 +92,8 @@ public class MainInterface extends JFrame implements ActionListener {
         jp4.add(labelBlock);
 
         jp4.add(textBlock);
+
+        jp4.add(new JScrollPane(textBlock));
 
         jp5.add(buttonEnter);
 
@@ -176,26 +177,32 @@ public class MainInterface extends JFrame implements ActionListener {
             Random random = new Random();
             List<Offer> offers = ExcelImport.importExcelAction(filePath);
             java.util.List<String> uas = ReadTxt.readTxt(path);
-            last_allocation_id = ChangeAwsIp.bindIp2Instance();
-            ChangeAwsIp.describeAddresses(Ips, last_allocation_id);
+//            last_allocation_id = ChangeAwsIp.bindIp2Instance();
+//            ChangeAwsIp.describeAddresses(Ips, last_allocation_id);
             for (Offer offer : offers) {
                 int uaNumber = Math.abs(random.nextInt(uas.size()));
                 System.out.println("Fake browser access:" + uas.get(uaNumber));
                 System.out.println("Fake identity login" + offer.toString());
-                Selenium.selenium(offer, uas.get(uaNumber), param, offerList);
-                textBlock.append("IP:" + Ips.get(Ips.size() - 1));
+//                try {
+//                    Selenium.selenium(offer, uas.get(uaNumber), param, offerList);
+//                } catch (Exception e) {
+//                    textBlock.append(e.getMessage());
+//                }
+//                textBlock.append("IP:" + Ips.get(Ips.size() - 1));
                 textBlock.append("     OfferId:" + param.getId());
                 textBlock.append("     CardNumber:" + offer.getCardNumber());
                 textBlock.append("     循环已经" + i++ + "次");
                 textBlock.repaint();
-                ChangeAwsIp.freedIp(last_allocation_id);
-                textBlock.append("     释放IP:" + Ips.get(Ips.size() - 1));
-                textBlock.repaint();
-                last_allocation_id = ChangeAwsIp.bindIp2Instance();
-                ChangeAwsIp.describeAddresses(Ips, last_allocation_id);
-                break;
+//                if (last_allocation_id != null && !last_allocation_id.equals("")) {
+//                    ChangeAwsIp.freedIp(last_allocation_id);
+//                    textBlock.append("     释放IP:" + Ips.get(Ips.size() - 1));
+//                }
+//                textBlock.repaint();
+//                last_allocation_id = ChangeAwsIp.bindIp2Instance();
+//                ChangeAwsIp.describeAddresses(Ips, last_allocation_id);
+//                break;
             }
-            ExcelImport.exportExcel(offerList, param.getTypeOffer());
+//            ExcelImport.exportExcel(offerList, param.getTypeOffer());
         }
     }
 
@@ -203,6 +210,7 @@ public class MainInterface extends JFrame implements ActionListener {
     public void clear() {
         textOfferId.setText("");
         textOfferUrl.setText("");
+        textBlock.setText("");
         textBlock.setText("");
     }
 
