@@ -18,11 +18,11 @@ import java.util.regex.Pattern;
 public class MainInterface extends JFrame implements ActionListener {
 
     //生产环境
-    public final static String FILEPATH = "C:\\Users\\Administrator\\Desktop\\TestUtils\\user.xls";
-    public final static String PATH = "C:\\Users\\Administrator\\Desktop\\TestUtils\\User-Agent.txt";
+//    public final static String FILEPATH = "C:\\Users\\Administrator\\Desktop\\TestUtils\\user.xls";
+//    public final static String PATH = "C:\\Users\\Administrator\\Desktop\\TestUtils\\User-Agent.txt";
     //测试环境
-//    public final static String FILEPATH = "D:\\user.xls";
-//    public final static String PATH = "D:\\User-Agent.txt";
+    public final static String FILEPATH = "D:\\user.xls";
+    public final static String PATH = "D:\\User-Agent.txt";
     JPanel jp1, jp2, jp3, jp4, jp5;     //面板
     JLabel labelTitle;      //标题
     JLabel labelOfferId, labelURL, labelBlock;       //提示
