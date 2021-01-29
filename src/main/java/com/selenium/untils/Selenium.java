@@ -1,11 +1,12 @@
-package selenium.untils;
+package com.selenium.untils;
 
+import com.selenium.typeOffer.typeOffer;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import selenium.pojo.Offer;
-import selenium.typeOffer.typeOffer;
+import com.selenium.pojo.Offer;
 
 import java.net.InetAddress;
 import java.util.HashMap;
@@ -19,7 +20,7 @@ public class Selenium {
         if (param.getTypeOffer() != null) {
             Thread.sleep(3000);
             //获取Ip
-            System.setProperty("webdriver.chrome.driver", "C:\\Users\\Administrator\\Desktop\\cmh\\chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver", "C:\\Users\\Administrator\\Desktop\\TestUtils\\chromedriver.exe");
             System.out.println(getIp());
             DesiredCapabilities capabilities;
             ChromeOptions options = new ChromeOptions();
@@ -31,7 +32,9 @@ public class Selenium {
                 headlessOptions.setExperimentalOption("mobileEmulation", mobileEmulation);
                 capabilities = DesiredCapabilities.chrome();
                 capabilities.setCapability(ChromeOptions.CAPABILITY, headlessOptions);
-                webDriver = new ChromeDriver(capabilities);
+                ChromeDriverService service = new ChromeDriverService.Builder()
+                        .build();
+                webDriver = new ChromeDriver(service, capabilities);
             } else {
                 options.addArguments("User-Agent=" + ua);
                 webDriver = new ChromeDriver(options);
@@ -45,7 +48,6 @@ public class Selenium {
             webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             //打开目标地址
             webDriver.get(param.getUrl());
-            //输入账号 密码并登陆系统
             Thread.sleep(1000);
             offer.setId(param.getTypeOffer());
             if (param.getTypeOffer() == 142196) {

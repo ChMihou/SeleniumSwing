@@ -1,6 +1,6 @@
-package selenium;
+package com.selenium;
 
-import selenium.swing.MainInterface;
+import com.selenium.swing.MainInterface;
 
 public class SeleniumMain {
     public static void main(String args[]) {

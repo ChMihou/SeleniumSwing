@@ -1,4 +1,4 @@
-package selenium.untils;
+package com.selenium.untils;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;

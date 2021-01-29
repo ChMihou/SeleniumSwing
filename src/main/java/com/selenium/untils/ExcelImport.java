@@ -1,4 +1,4 @@
-package selenium.untils;
+package com.selenium.untils;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -6,7 +6,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.util.CellRangeAddress;
-import selenium.pojo.Offer;
+import com.selenium.pojo.Offer;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
@@ -98,11 +98,15 @@ public class ExcelImport {
                 HSSFCell CC = row.getCell(12);
                 String cc = getValue(CC);
 
-                row.getCell(13).setCellType(CellType.STRING);
-                HSSFCell realPhone = row.getCell(13);
-                String realphone = getValue(realPhone);
-                Offer offer = new Offer(cardNumber, lastName, name, year, month, cvv, postcode, country, city, email, phone, state, cc, "0" + realphone);
-
+                Offer offer;
+                if (row.getCell(13) != null) {
+                    row.getCell(13).setCellType(CellType.STRING);
+                    HSSFCell realPhone = row.getCell(13);
+                    String realphone = getValue(realPhone);
+                    offer = new Offer(cardNumber, lastName, name, year, month, cvv, postcode, country, city, email, phone, state, cc, "0" + realphone);
+                } else {
+                    offer = new Offer(cardNumber, lastName, name, year, month, cvv, postcode, country, city, email, phone, state, cc, "0");
+                }
                 list.add(offer);
             }
         }
@@ -130,7 +134,7 @@ public class ExcelImport {
     }
 
     //导出excel表格
-    public static void exportExcel(List<Offer> offers,Integer OfferId) throws IOException {
+    public static void exportExcel(List<Offer> offers, Integer OfferId) throws IOException {
 
         HSSFWorkbook wb = new HSSFWorkbook();
 
@@ -198,7 +202,7 @@ public class ExcelImport {
         String resultName = "";
         String ctxPath = "C:\\Users\\Administrator\\Desktop\\cmh";
         String name = new SimpleDateFormat("ddHHmmss").format(new Date());
-        String fileName = "Offer:"+OfferId+"--"+name + ".xls";
+        String fileName = "Offer:" + OfferId + "--" + name + ".xls";
         String bizPath = "files";
         String nowday = new SimpleDateFormat("yyyyMMdd").format(new Date());
         File file = new File(ctxPath + File.separator + bizPath + File.separator + nowday);

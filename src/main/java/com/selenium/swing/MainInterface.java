@@ -1,10 +1,8 @@
-package selenium.swing;
+package com.selenium.swing;
 
-import selenium.pojo.Offer;
-import selenium.untils.ChangeAwsIp;
-import selenium.untils.ExcelImport;
-import selenium.untils.ReadTxt;
-import selenium.untils.Selenium;
+import com.selenium.pojo.Offer;
+import com.selenium.untils.ExcelImport;
+import com.selenium.untils.ReadTxt;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,13 +16,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MainInterface extends JFrame implements ActionListener {
+
+    //生产环境
+    public final static String FILEPATH = "C:\\Users\\Administrator\\Desktop\\TestUtils\\user.xls";
+    public final static String PATH = "C:\\Users\\Administrator\\Desktop\\TestUtils\\User-Agent.txt";
+    //测试环境
+//    public final static String FILEPATH = "D:\\user.xls";
+//    public final static String PATH = "D:\\User-Agent.txt";
     JPanel jp1, jp2, jp3, jp4, jp5;     //面板
     JLabel labelTitle;      //标题
     JLabel labelOfferId, labelURL, labelBlock;       //提示
     JTextField textOfferId;                  //输入OfferId
     JTextField textOfferUrl;                            //输入OfferUrl
     JTextArea textBlock;
-    JButton buttonEnter, buttonReset;                        //登录按扭
+    JButton buttonEnter, buttonReset;                        //测试按扭，重置按钮
 
     //构造
     public MainInterface() {
@@ -165,34 +170,30 @@ public class MainInterface extends JFrame implements ActionListener {
                     JOptionPane.WARNING_MESSAGE);
             clear();
         } else {
-            String filePath = "D:\\user.xls";
-            String path = "D:\\User-Agent.txt";
-            int i = 1;
-            List<Offer> offerList = new ArrayList<>();
-            String last_allocation_id;
-            List<String> Ips = new ArrayList<>();
-            Offer param = new Offer();
-            param.setId(Integer.valueOf(textOfferId.getText()));
-            param.setUrl(textOfferUrl.getText());
-            Random random = new Random();
-            List<Offer> offers = ExcelImport.importExcelAction(filePath);
-            java.util.List<String> uas = ReadTxt.readTxt(path);
+            try {
+                int i = 1;
+                List<Offer> offerList = new ArrayList<>();
+                String last_allocation_id;
+                List<String> Ips = new ArrayList<>();
+                Offer param = new Offer();
+                param.setId(Integer.valueOf(textOfferId.getText()));
+                param.setUrl(textOfferUrl.getText());
+                Random random = new Random();
+                List<Offer> offers = ExcelImport.importExcelAction(FILEPATH);
+                java.util.List<String> uas = ReadTxt.readTxt(PATH);
 //            last_allocation_id = ChangeAwsIp.bindIp2Instance();
-//            ChangeAwsIp.describeAddresses(Ips, last_allocation_id);
-            for (Offer offer : offers) {
-                int uaNumber = Math.abs(random.nextInt(uas.size()));
-                System.out.println("Fake browser access:" + uas.get(uaNumber));
-                System.out.println("Fake identity login" + offer.toString());
-//                try {
+////            ChangeAwsIp.describeAddresses(Ips, last_allocation_id);
+                for (Offer offer : offers) {
+                    int uaNumber = Math.abs(random.nextInt(uas.size()));
+                    System.out.println("Fake browser access:" + uas.get(uaNumber));
+                    System.out.println("Fake identity login" + offer.toString());
+//
 //                    Selenium.selenium(offer, uas.get(uaNumber), param, offerList);
-//                } catch (Exception e) {
-//                    textBlock.append(e.getMessage());
-//                }
 //                textBlock.append("IP:" + Ips.get(Ips.size() - 1));
-                textBlock.append("     OfferId:" + param.getId());
-                textBlock.append("     CardNumber:" + offer.getCardNumber());
-                textBlock.append("     循环已经" + i++ + "次");
-                textBlock.repaint();
+                    textBlock.append("     OfferId:" + param.getId());
+                    textBlock.append("     CardNumber:" + offer.getCardNumber());
+                    textBlock.append("     循环已经" + i++ + "次");
+                    textBlock.repaint();
 //                if (last_allocation_id != null && !last_allocation_id.equals("")) {
 //                    ChangeAwsIp.freedIp(last_allocation_id);
 //                    textBlock.append("     释放IP:" + Ips.get(Ips.size() - 1));
@@ -201,6 +202,11 @@ public class MainInterface extends JFrame implements ActionListener {
 //                last_allocation_id = ChangeAwsIp.bindIp2Instance();
 //                ChangeAwsIp.describeAddresses(Ips, last_allocation_id);
 //                break;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                textBlock.append(e.getMessage());
+                textBlock.repaint();
             }
 //            ExcelImport.exportExcel(offerList, param.getTypeOffer());
         }

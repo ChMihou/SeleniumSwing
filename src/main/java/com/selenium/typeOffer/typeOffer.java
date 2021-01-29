@@ -1,8 +1,8 @@
-package selenium.typeOffer;
+package com.selenium.typeOffer;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import selenium.pojo.Offer;
+import com.selenium.pojo.Offer;
 
 import java.util.List;
 

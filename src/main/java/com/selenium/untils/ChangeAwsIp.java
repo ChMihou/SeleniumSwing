@@ -1,4 +1,4 @@
-package selenium.untils;
+package com.selenium.untils;
 
 import com.amazonaws.services.ec2.AmazonEC2;
 import com.amazonaws.services.ec2.AmazonEC2ClientBuilder;

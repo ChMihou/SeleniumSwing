@@ -1,4 +1,4 @@
-package selenium.pojo;
+package com.selenium.pojo;
 
 import java.io.Serializable;
 
