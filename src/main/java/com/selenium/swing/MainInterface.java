@@ -1,8 +1,7 @@
 package com.selenium.swing;
 
 import com.selenium.pojo.Offer;
-import com.selenium.untils.ExcelImport;
-import com.selenium.untils.ReadTxt;
+import com.selenium.untils.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,11 +17,11 @@ import java.util.regex.Pattern;
 public class MainInterface extends JFrame implements ActionListener {
 
     //生产环境
-//    public final static String FILEPATH = "C:\\Users\\Administrator\\Desktop\\TestUtils\\user.xls";
-//    public final static String PATH = "C:\\Users\\Administrator\\Desktop\\TestUtils\\User-Agent.txt";
+    public final static String FILEPATH = "C:\\Users\\Administrator\\Desktop\\TestUtils\\user.xls";
+    public final static String PATH = "C:\\Users\\Administrator\\Desktop\\TestUtils\\User-Agent.txt";
     //测试环境
-    public final static String FILEPATH = "D:\\user.xls";
-    public final static String PATH = "D:\\User-Agent.txt";
+//    public final static String FILEPATH = "D:\\user.xls";
+//    public final static String PATH = "D:\\User-Agent.txt";
     JPanel jp1, jp2, jp3, jp4, jp5;     //面板
     JLabel labelTitle;      //标题
     JLabel labelOfferId, labelURL, labelBlock;       //提示
@@ -152,7 +151,7 @@ public class MainInterface extends JFrame implements ActionListener {
     }
 
 
-    public void testOffer() throws Exception {
+    public void testOffer() {
         //如果账户密码正确
         if (textOfferId.getText().isEmpty() && textOfferUrl.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "请输入OfferId和OfferUrl", "提示",
@@ -176,39 +175,37 @@ public class MainInterface extends JFrame implements ActionListener {
                 String last_allocation_id;
                 List<String> Ips = new ArrayList<>();
                 Offer param = new Offer();
-                param.setId(Integer.valueOf(textOfferId.getText()));
+                param.setTypeOffer(Integer.valueOf(textOfferId.getText()));
                 param.setUrl(textOfferUrl.getText());
                 Random random = new Random();
                 List<Offer> offers = ExcelImport.importExcelAction(FILEPATH);
                 java.util.List<String> uas = ReadTxt.readTxt(PATH);
-//            last_allocation_id = ChangeAwsIp.bindIp2Instance();
-////            ChangeAwsIp.describeAddresses(Ips, last_allocation_id);
+                last_allocation_id = ChangeAwsIp.bindIp2Instance();
+                ChangeAwsIp.describeAddresses(Ips, last_allocation_id);
+                Ips.add(getIp.getV4IP());
                 for (Offer offer : offers) {
                     int uaNumber = Math.abs(random.nextInt(uas.size()));
                     System.out.println("Fake browser access:" + uas.get(uaNumber));
                     System.out.println("Fake identity login" + offer.toString());
-//
-//                    Selenium.selenium(offer, uas.get(uaNumber), param, offerList);
-//                textBlock.append("IP:" + Ips.get(Ips.size() - 1));
+                    Selenium.selenium(offer, uas.get(uaNumber), param, offerList);
+                    textBlock.append("IP:" + Ips.get(Ips.size() - 1));
                     textBlock.append("     OfferId:" + param.getId());
                     textBlock.append("     CardNumber:" + offer.getCardNumber());
                     textBlock.append("     循环已经" + i++ + "次");
+                    if (last_allocation_id != null && !last_allocation_id.equals("")) {
+                        ChangeAwsIp.freedIp(last_allocation_id);
+                        textBlock.append("     释放IP:" + Ips.get(Ips.size() - 1));
+                    }
                     textBlock.repaint();
-//                if (last_allocation_id != null && !last_allocation_id.equals("")) {
-//                    ChangeAwsIp.freedIp(last_allocation_id);
-//                    textBlock.append("     释放IP:" + Ips.get(Ips.size() - 1));
-//                }
-//                textBlock.repaint();
-//                last_allocation_id = ChangeAwsIp.bindIp2Instance();
-//                ChangeAwsIp.describeAddresses(Ips, last_allocation_id);
-//                break;
+                    last_allocation_id = ChangeAwsIp.bindIp2Instance();
+                    ChangeAwsIp.describeAddresses(Ips, last_allocation_id);
                 }
+                ExcelImport.exportExcel(offerList, param.getTypeOffer());
             } catch (Exception e) {
                 e.printStackTrace();
                 textBlock.append(e.getMessage());
                 textBlock.repaint();
             }
-//            ExcelImport.exportExcel(offerList, param.getTypeOffer());
         }
     }
 

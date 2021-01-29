@@ -29,7 +29,6 @@ public class typeOffer {
             e.printStackTrace();
         } finally {
             webDriver.quit();
-            webDriver.close();
         }
     }
 
@@ -62,7 +61,6 @@ public class typeOffer {
             e.printStackTrace();
         } finally {
             webDriver.quit();
-            webDriver.close();
         }
     }
 
@@ -87,7 +85,6 @@ public class typeOffer {
             e.printStackTrace();
         } finally {
             webDriver.quit();
-            webDriver.close();
         }
     }
 
@@ -112,7 +109,6 @@ public class typeOffer {
             e.printStackTrace();
         } finally {
             webDriver.quit();
-            webDriver.close();
         }
     }
 
@@ -137,7 +133,6 @@ public class typeOffer {
             e.printStackTrace();
         } finally {
             webDriver.quit();
-            webDriver.close();
         }
     }
 
@@ -166,7 +161,35 @@ public class typeOffer {
             e.printStackTrace();
         } finally {
             webDriver.quit();
-            webDriver.close();
+        }
+    }
+
+    public static void UniversalType(WebDriver webDriver, Offer offer, List<Offer> offerList) {
+        try {
+            webDriver.findElement(new By.ByName("firstname")).sendKeys(offer.getName());
+            webDriver.findElement(new By.ByName("lastname")).sendKeys(offer.getLastName());
+            webDriver.findElement(new By.ByName("address")).sendKeys(offer.getAddress());
+            webDriver.findElement(new By.ByName("city")).sendKeys(offer.getCountry());
+            webDriver.findElement(new By.ByName("phone")).sendKeys(offer.getPhone());
+            webDriver.findElement(new By.ByName("zipcode")).sendKeys(offer.getPostcode());
+            webDriver.findElement(new By.ByName("email")).sendKeys(offer.getEmail());
+            webDriver.findElement(new By.ByName("state")).sendKeys(offer.getState());
+            Thread.sleep(2000);
+            webDriver.findElement(new By.ByXPath("//button[@class='btn btn-txt']")).click();
+            Thread.sleep(5000);
+            webDriver.findElement(new By.ByName("cc-cardnumber")).sendKeys(offer.getCardNumber().substring(1));
+            webDriver.findElement(new By.ByName("cc-expires-month")).sendKeys(offer.getMonth());
+            webDriver.findElement(new By.ByName("cc-expires-year")).sendKeys(offer.getYear().substring(2));
+            webDriver.findElement(new By.ByName("cc-cvv2")).sendKeys(offer.getCvv());
+            webDriver.findElement(new By.ByName("terms")).click();
+            Thread.sleep(2000);
+            webDriver.findElement(new By.ByXPath("//button[@class='button gtw_default btn-txt']")).click();
+            Thread.sleep(20000);
+            offerList.add(offer);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            webDriver.quit();
         }
     }
 

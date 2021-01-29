@@ -21,6 +21,7 @@ public class Selenium {
             Thread.sleep(3000);
             //获取Ip
             System.setProperty("webdriver.chrome.driver", "C:\\Users\\Administrator\\Desktop\\TestUtils\\chromedriver.exe");
+//            System.setProperty("webdriver.chrome.driver", "D:\\chromedriver.exe");
             System.out.println(getIp());
             DesiredCapabilities capabilities;
             ChromeOptions options = new ChromeOptions();
@@ -62,6 +63,8 @@ public class Selenium {
                 typeOffer.typeOffer143138(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 142395) {
                 typeOffer.typeOffer142395(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 145104) {
+                typeOffer.UniversalType(webDriver, offer, offerList);
             }
         }
     }
