@@ -51,20 +51,14 @@ public class Selenium {
             webDriver.get(param.getUrl());
             Thread.sleep(1000);
             offer.setId(param.getTypeOffer());
-            if (param.getTypeOffer() == 142196) {
-                typeOffer.typeOffer142196(webDriver, offer, offerList);
-            } else if (param.getTypeOffer() == 142355) {
-                typeOffer.typeOffer142355(webDriver, offer, offerList);
-            } else if (param.getTypeOffer() == 141237) {
-                typeOffer.typeOffer141237(webDriver, offer, offerList);
-            } else if (param.getTypeOffer() == 143139) {
-                typeOffer.typeOffer143139(webDriver, offer, offerList);
-            } else if (param.getTypeOffer() == 143138) {
-                typeOffer.typeOffer143138(webDriver, offer, offerList);
-            } else if (param.getTypeOffer() == 142395) {
+            if (param.getTypeOffer() == 142395) {
                 typeOffer.typeOffer142395(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 145104) {
                 typeOffer.UniversalType(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 145017) {
+                typeOffer.UniversalType2(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 144869 || param.getTypeOffer() == 144868) {
+                typeOffer.UniversalType3(webDriver, offer, offerList);
             }
         }
     }

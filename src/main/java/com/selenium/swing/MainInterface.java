@@ -189,7 +189,7 @@ public class MainInterface extends JFrame implements ActionListener {
                     System.out.println("Fake identity login" + offer.toString());
                     Selenium.selenium(offer, uas.get(uaNumber), param, offerList);
                     textBlock.append("IP:" + Ips.get(Ips.size() - 1));
-                    textBlock.append("     OfferId:" + param.getId());
+                    textBlock.append("     OfferId:" + param.getTypeOffer());
                     textBlock.append("     CardNumber:" + offer.getCardNumber());
                     textBlock.append("     循环已经" + i++ + "次");
                     if (last_allocation_id != null && !last_allocation_id.equals("")) {
