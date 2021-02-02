@@ -59,6 +59,10 @@ public class Selenium {
                 typeOffer.UniversalType2(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 144869 || param.getTypeOffer() == 144868) {
                 typeOffer.UniversalType3(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 145372) {
+                typeOffer.UniversalType5(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 145376 || param.getTypeOffer() == 145375) {
+                typeOffer.UniversalType4(webDriver, offer, offerList);
             }
         }
     }

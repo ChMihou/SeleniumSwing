@@ -28,7 +28,7 @@ public class MainInterface extends JFrame implements ActionListener {
     JTextField textOfferId;                  //输入OfferId
     JTextField textOfferUrl;                            //输入OfferUrl
     JTextArea textBlock;
-    JButton buttonEnter, buttonReset;                        //测试按扭，重置按钮
+    JButton buttonEnter, buttonReset, buttonFlush;                        //测试按扭，重置按钮
 
     //构造
     public MainInterface() {
@@ -79,6 +79,8 @@ public class MainInterface extends JFrame implements ActionListener {
         buttonEnter = new JButton(" 测试开始  ");
         //重置按钮
         buttonReset = new JButton("     重置    ");
+        //刷新按钮
+        buttonFlush = new JButton(" 刷新信息  ");
         //设置布局
         this.setLayout(new GridLayout(6, 1));   //网格式布局
 
@@ -103,6 +105,8 @@ public class MainInterface extends JFrame implements ActionListener {
 
         jp5.add(buttonReset);
 
+        jp5.add(buttonFlush);
+
         this.add(jp1);
         this.add(jp2);
         this.add(jp3);
@@ -114,6 +118,7 @@ public class MainInterface extends JFrame implements ActionListener {
         textOfferUrl.addActionListener(this);
         buttonEnter.addActionListener(this);
         buttonReset.addActionListener(this);
+        buttonFlush.addActionListener(this);
     }
 
     //设置窗口背景
@@ -146,6 +151,9 @@ public class MainInterface extends JFrame implements ActionListener {
         }
         if (e.getSource() == buttonReset) {
             clear();
+        }
+        if (e.getSource() == buttonFlush) {
+            textBlock.repaint();
         }
 
     }
@@ -196,7 +204,7 @@ public class MainInterface extends JFrame implements ActionListener {
                         ChangeAwsIp.freedIp(last_allocation_id);
                         textBlock.append("     释放IP:" + Ips.get(Ips.size() - 1));
                     }
-                    textBlock.repaint();
+                    textBlock.validate();
                     last_allocation_id = ChangeAwsIp.bindIp2Instance();
                     ChangeAwsIp.describeAddresses(Ips, last_allocation_id);
                 }

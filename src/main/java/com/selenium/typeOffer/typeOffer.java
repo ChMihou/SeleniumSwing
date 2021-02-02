@@ -124,4 +124,72 @@ public class typeOffer {
         }
     }
 
+    public static void UniversalType4(WebDriver webDriver, Offer offer, List<Offer> offerList) {
+        try {
+            webDriver.findElement(new By.ById("firstName")).sendKeys(offer.getName());
+            webDriver.findElement(new By.ById("lastName")).sendKeys(offer.getLastName());
+            webDriver.findElement(new By.ById("phone")).sendKeys(offer.getPhone());
+            webDriver.findElement(new By.ById("email")).sendKeys(offer.getEmail());
+            webDriver.findElement(new By.ById("address1")).sendKeys(offer.getAddress());
+            webDriver.findElement(new By.ById("address2")).sendKeys(offer.getCountry());
+            webDriver.findElement(new By.ById("zip")).sendKeys(offer.getPostcode());
+            webDriver.findElement(new By.ById("city")).sendKeys(offer.getCountry());
+            webDriver.findElement(new By.ById("state")).sendKeys(offer.getState());
+            Thread.sleep(2000);
+            webDriver.findElement(new By.ByXPath("//button[@class='master-button button pulse ']")).click();
+            Thread.sleep(6000);
+            webDriver.findElement(new By.ById("cc")).sendKeys(offer.getCardNumber().substring(1));
+            webDriver.findElement(new By.ById("expMonth")).click();
+            if (offer.getMonth().length() == 1) {
+                webDriver.findElement(new By.ByXPath("//option[@value='" + "0" + offer.getMonth() + "']")).click();
+            } else {
+                webDriver.findElement(new By.ByXPath("//option[@value='" + offer.getMonth() + "']")).click();
+            }
+            webDriver.findElement(new By.ById("expYear")).sendKeys(offer.getYear());
+            webDriver.findElement(new By.ById("cvv")).sendKeys(offer.getCvv());
+            Thread.sleep(2000);
+            webDriver.findElement(new By.ByXPath("//button[@class='master-button button pulse']")).click();
+            Thread.sleep(20000);
+            offerList.add(offer);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            webDriver.quit();
+        }
+    }
+
+    public static void UniversalType5(WebDriver webDriver, Offer offer, List<Offer> offerList) {
+        try {
+            webDriver.findElement(new By.ByName("firstName")).sendKeys(offer.getName());
+            webDriver.findElement(new By.ByName("lastName")).sendKeys(offer.getLastName());
+            webDriver.findElement(new By.ByName("phone")).sendKeys(offer.getPhone());
+            webDriver.findElement(new By.ByName("email")).sendKeys(offer.getEmail());
+            Thread.sleep(2000);
+            webDriver.findElement(new By.ByXPath("//a[@class='button-1 Classname']")).click();
+            Thread.sleep(6000);
+            webDriver.findElement(new By.ByName("shippingAddress1")).sendKeys(offer.getAddress());
+            webDriver.findElement(new By.ByName("shippingState")).sendKeys(offer.getState());
+            webDriver.findElement(new By.ByName("shippingCity")).sendKeys(offer.getCountry());
+            webDriver.findElement(new By.ByName("shippingZip")).sendKeys(offer.getPostcode());
+            webDriver.findElement(new By.ByName("creditCardNumber")).click();
+            webDriver.findElement(new By.ByName("creditCardNumber")).sendKeys(offer.getCardNumber().substring(1));
+            if (offer.getMonth().length() == 1) {
+                webDriver.findElement(new By.ByXPath("//option[@value='" + "0" + offer.getMonth() + "']")).click();
+            } else {
+                webDriver.findElement(new By.ByXPath("//option[@value='" + offer.getMonth() + "']")).click();
+            }
+            webDriver.findElement(new By.ByName("expyear")).sendKeys(offer.getYear());
+            webDriver.findElement(new By.ByName("CVV")).sendKeys(offer.getCvv());
+            Thread.sleep(2000);
+            webDriver.findElement(new By.ByXPath("//button[@class='button-1']")).click();
+            Thread.sleep(20000);
+            offerList.add(offer);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            webDriver.quit();
+        }
+    }
+
+
 }
