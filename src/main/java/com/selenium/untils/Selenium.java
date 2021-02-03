@@ -55,14 +55,18 @@ public class Selenium {
                 typeOffer.typeOffer142395(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 145104) {
                 typeOffer.UniversalType(webDriver, offer, offerList);
-            } else if (param.getTypeOffer() == 145017) {
+            } else if (param.getTypeOffer() == 145017 || param.getTypeOffer() == 145013) {
                 typeOffer.UniversalType2(webDriver, offer, offerList);
-            } else if (param.getTypeOffer() == 144869 || param.getTypeOffer() == 144868) {
+            } else if (param.getTypeOffer() == 144869 || param.getTypeOffer() == 144868 || param.getTypeOffer() == 144435) {
                 typeOffer.UniversalType3(webDriver, offer, offerList);
-            } else if (param.getTypeOffer() == 145372) {
+            } else if (param.getTypeOffer() == 145372 || param.getTypeOffer() == 145371) {
                 typeOffer.UniversalType5(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 145376 || param.getTypeOffer() == 145375) {
                 typeOffer.UniversalType4(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 144778) {
+                typeOffer.UniversalType6(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 144498) {
+                typeOffer.UniversalType7(webDriver, offer, offerList);
             }
         }
     }
