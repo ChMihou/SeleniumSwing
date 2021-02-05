@@ -1,6 +1,6 @@
 package com.selenium.untils;
 
-import com.selenium.typeOffer.typeOffer;
+import com.selenium.typeOffer.typeOfferUS;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
@@ -51,22 +51,26 @@ public class Selenium {
             webDriver.get(param.getUrl());
             Thread.sleep(1000);
             offer.setId(param.getTypeOffer());
-            if (param.getTypeOffer() == 142395) {
-                typeOffer.typeOffer142395(webDriver, offer, offerList);
+            if (param.getTypeOffer() == 143094) {
+                typeOfferUS.typeOffer143094(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 145104) {
-                typeOffer.UniversalType(webDriver, offer, offerList);
+                typeOfferUS.UniversalType(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 145017 || param.getTypeOffer() == 145013) {
-                typeOffer.UniversalType2(webDriver, offer, offerList);
-            } else if (param.getTypeOffer() == 144869 || param.getTypeOffer() == 144868 || param.getTypeOffer() == 144435) {
-                typeOffer.UniversalType3(webDriver, offer, offerList);
+                typeOfferUS.UniversalType2(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 144869 || param.getTypeOffer() == 144868 || param.getTypeOffer() == 144435 || param.getTypeOffer() == 144096) {
+                typeOfferUS.UniversalType3(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 145372 || param.getTypeOffer() == 145371) {
-                typeOffer.UniversalType5(webDriver, offer, offerList);
+                typeOfferUS.UniversalType5(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 145376 || param.getTypeOffer() == 145375) {
-                typeOffer.UniversalType4(webDriver, offer, offerList);
+                typeOfferUS.UniversalType4(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 144778) {
-                typeOffer.UniversalType6(webDriver, offer, offerList);
+                typeOfferUS.UniversalType6(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 144498) {
-                typeOffer.UniversalType7(webDriver, offer, offerList);
+                typeOfferUS.UniversalType7(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 144430) {
+                typeOfferUS.UniversalType8(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 145650) {
+                typeOfferUS.UniversalType9(webDriver, offer, offerList);
             }
         }
     }

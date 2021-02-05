@@ -15,6 +15,7 @@ public class ChangeAwsIp {
     public static String bindIp2Instance() {
         //实例的Id
         String instance_id = "i-023a94458ad80f3f0";
+//        String instance_id = "i-02c8e4245e11e7aad";
 
         final AmazonEC2 ec2 = AmazonEC2ClientBuilder.defaultClient();
 

@@ -70,7 +70,7 @@ public class MainInterface extends JFrame implements ActionListener {
 
         //设置JTextField
         textOfferId = new JTextField(50);
-        textOfferUrl = new JTextField(50);
+        textOfferUrl = new JTextField("https://m.bolomobi.com/c/n/145013/321?cid={CLICK_ID}&sc={SOURCE}",50);
         //设置白板显示信息
         textBlock = new JTextArea(6, 50);
         //设置自动换行输出信息
