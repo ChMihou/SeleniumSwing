@@ -57,7 +57,7 @@ public class Selenium {
                 typeOfferUS.UniversalType(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 145017 || param.getTypeOffer() == 145013) {
                 typeOfferUS.UniversalType2(webDriver, offer, offerList);
-            } else if (param.getTypeOffer() == 144869 || param.getTypeOffer() == 144868 || param.getTypeOffer() == 144435 || param.getTypeOffer() == 144096) {
+            } else if (param.getTypeOffer() == 144869 || param.getTypeOffer() == 144868 || param.getTypeOffer() == 144435 || param.getTypeOffer() == 144096 || param.getTypeOffer() == 144489) {
                 typeOfferUS.UniversalType3(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 145372 || param.getTypeOffer() == 145371) {
                 typeOfferUS.UniversalType5(webDriver, offer, offerList);
