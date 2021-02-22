@@ -13,10 +13,11 @@ public class ChangeAwsIp {
      * @return 返回弹性IP的分配Id
      */
     public static String bindIp2Instance() {
-        //实例的Id
-        String instance_id = "i-023a94458ad80f3f0";
-//        String instance_id = "i-02c8e4245e11e7aad";
-
+        //美国实例的Id
+//        String instance_id = "i-023a94458ad80f3f0";
+        String instance_id = "i-02c8e4245e11e7aad";
+        //英国实例ID
+//        String instance_id = "i-0a28be3e18122f3dc";
         final AmazonEC2 ec2 = AmazonEC2ClientBuilder.defaultClient();
 
         AllocateAddressRequest allocate_request = new AllocateAddressRequest()

@@ -1,5 +1,6 @@
 package com.selenium.untils;
 
+import com.selenium.typeOffer.typeOfferUK;
 import com.selenium.typeOffer.typeOfferUS;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -55,9 +56,9 @@ public class Selenium {
                 typeOfferUS.typeOffer143094(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 145104) {
                 typeOfferUS.UniversalType(webDriver, offer, offerList);
-            } else if (param.getTypeOffer() == 145017 || param.getTypeOffer() == 145013) {
+            } else if (param.getTypeOffer() == 145017 || param.getTypeOffer() == 145013 || param.getTypeOffer() == 146022) {
                 typeOfferUS.UniversalType2(webDriver, offer, offerList);
-            } else if (param.getTypeOffer() == 144869 || param.getTypeOffer() == 144868 || param.getTypeOffer() == 144435 || param.getTypeOffer() == 144096 || param.getTypeOffer() == 144489) {
+            } else if (param.getTypeOffer() == 144869 || param.getTypeOffer() == 145816 || param.getTypeOffer() == 145815 || param.getTypeOffer() == 144868 || param.getTypeOffer() == 144435 || param.getTypeOffer() == 144096 || param.getTypeOffer() == 144489) {
                 typeOfferUS.UniversalType3(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 145372 || param.getTypeOffer() == 145371) {
                 typeOfferUS.UniversalType5(webDriver, offer, offerList);
@@ -66,11 +67,31 @@ public class Selenium {
             } else if (param.getTypeOffer() == 144778) {
                 typeOfferUS.UniversalType6(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 144498) {
-                typeOfferUS.UniversalType7(webDriver, offer, offerList);
+                typeOfferUK.UniversalType2(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 144430) {
                 typeOfferUS.UniversalType8(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 145650) {
                 typeOfferUS.UniversalType9(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 145704) {
+                typeOfferUK.UniversalType1(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 145793) {
+                typeOfferUS.UniversalType12(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 146011) {
+                typeOfferUK.UniversalType4(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 146012 || param.getTypeOffer() == 146013 || param.getTypeOffer() == 146014 || param.getTypeOffer() == 146015) {
+                typeOfferUS.UniversalType13(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 146024 || param.getTypeOffer() == 146023) {
+                typeOfferUK.UniversalType5(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 144496) {
+                typeOfferUK.UniversalType6(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 145810) {
+                typeOfferUS.UniversalType14(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 145605) {
+                typeOfferUK.UniversalType3(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 144471 || param.getTypeOffer() == 144473) {
+                typeOfferUS.UniversalType15(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 141074) {
+                typeOfferUS.UniversalType1(webDriver, offer, offerList);
             }
         }
     }
