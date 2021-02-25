@@ -28,10 +28,10 @@ public final class ReadTxt {
         return list;
     }
 
-    public static void writeFileContext(List<String> strings) throws Exception {
+    public static void writeFileContext(List<String> strings, int param) throws Exception {
         String ctxPath = "C:\\Users\\Administrator\\Desktop\\cmh";
         String name = new SimpleDateFormat("ddHHmmss").format(new Date());
-        String fileName = "Ip:" + name + ".txt";
+        String fileName = "Offer:" + name + ".txt";
         String bizPath = "files";
         String nowday = new SimpleDateFormat("yyyyMMdd").format(new Date());
         File file = new File(ctxPath + File.separator + bizPath + File.separator + nowday);
@@ -39,7 +39,7 @@ public final class ReadTxt {
         if (!file.isFile()) {
             file.createNewFile();
         }
-        BufferedWriter writer = new BufferedWriter(new FileWriter(file.getPath() + File.separator + fileName));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(file.getPath() + File.separator + fileName + param));
         for (String l : strings) {
             writer.write(l + "\r\n");
         }

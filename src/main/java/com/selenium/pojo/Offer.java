@@ -36,10 +36,6 @@ public class Offer implements Serializable {
 
     private String state;
 
-    private String submit1;
-
-    private String submit2;
-
     private String url;
 
     private Integer typeOffer;
@@ -174,22 +170,6 @@ public class Offer implements Serializable {
         this.postcode = postcode;
     }
 
-    public String getSubmit1() {
-        return submit1;
-    }
-
-    public void setSubmit1(String submit1) {
-        this.submit1 = submit1;
-    }
-
-    public String getSubmit2() {
-        return submit2;
-    }
-
-    public void setSubmit2(String submit2) {
-        this.submit2 = submit2;
-    }
-
     public String getDay() {
         if (day == null)
             return day = "20";
@@ -245,8 +225,6 @@ public class Offer implements Serializable {
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", state='" + state + '\'' +
-                ", submit1='" + submit1 + '\'' +
-                ", submit2='" + submit2 + '\'' +
                 ", url='" + url + '\'' +
                 ", typeOffer=" + typeOffer +
                 ", realPhone='" + realPhone + '\'' +

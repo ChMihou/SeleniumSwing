@@ -56,7 +56,7 @@ public class Selenium {
                 typeOfferUS.typeOffer143094(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 145104) {
                 typeOfferUS.UniversalType(webDriver, offer, offerList);
-            } else if (param.getTypeOffer() == 145017 || param.getTypeOffer() == 145013 || param.getTypeOffer() == 146022) {
+            } else if (param.getTypeOffer() == 145017 || param.getTypeOffer() == 145013) {
                 typeOfferUS.UniversalType2(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 144869 || param.getTypeOffer() == 145816 || param.getTypeOffer() == 145815 || param.getTypeOffer() == 144868 || param.getTypeOffer() == 144435 || param.getTypeOffer() == 144096 || param.getTypeOffer() == 144489) {
                 typeOfferUS.UniversalType3(webDriver, offer, offerList);
@@ -76,7 +76,7 @@ public class Selenium {
                 typeOfferUK.UniversalType1(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 145793) {
                 typeOfferUS.UniversalType12(webDriver, offer, offerList);
-            } else if (param.getTypeOffer() == 146011) {
+            } else if (param.getTypeOffer() == 146011 || param.getTypeOffer() == 145605) {
                 typeOfferUK.UniversalType4(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 146012 || param.getTypeOffer() == 146013 || param.getTypeOffer() == 146014 || param.getTypeOffer() == 146015) {
                 typeOfferUS.UniversalType13(webDriver, offer, offerList);
@@ -86,12 +86,26 @@ public class Selenium {
                 typeOfferUK.UniversalType6(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 145810) {
                 typeOfferUS.UniversalType14(webDriver, offer, offerList);
-            } else if (param.getTypeOffer() == 145605) {
-                typeOfferUK.UniversalType3(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 144471 || param.getTypeOffer() == 144473) {
                 typeOfferUS.UniversalType15(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 141074) {
                 typeOfferUS.UniversalType1(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 146022) {
+                typeOfferUS.UniversalType16(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 137618) {
+                typeOfferUK.UniversalType7(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 146240) {
+                typeOfferUS.UniversalType17(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 146266) {
+                typeOfferUK.UniversalType8(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 146304 || param.getTypeOffer() == 146305) {
+                typeOfferUK.UniversalType9(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 146277) {
+                typeOfferUK.UniversalType10(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 143067) {
+                typeOfferUS.UniversalType18(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 140974) {
+                typeOfferUS.UniversalType19(webDriver, offer, offerList);
             }
         }
     }

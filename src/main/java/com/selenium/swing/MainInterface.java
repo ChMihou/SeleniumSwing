@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -70,7 +71,7 @@ public class MainInterface extends JFrame implements ActionListener {
 
         //设置JTextField
         textOfferId = new JTextField(50);
-        textOfferUrl = new JTextField("https://m.bolomobi.com/c/n/145013/321?cid={CLICK_ID}&sc={SOURCE}",50);
+        textOfferUrl = new JTextField("https://m.bolomobi.com/c/n/145013/321?cid={CLICK_ID}&sc={SOURCE}", 50);
         //设置白板显示信息
         textBlock = new JTextArea(6, 50);
         //设置自动换行输出信息
@@ -193,6 +194,7 @@ public class MainInterface extends JFrame implements ActionListener {
                 Ips.add(getIp.getV4IP());
                 for (Offer offer : offers) {
                     int uaNumber = Math.abs(random.nextInt(uas.size()));
+                    System.out.println();
                     System.out.println("Fake browser access:" + uas.get(uaNumber));
                     System.out.println("Fake identity login" + offer.toString());
                     Selenium.selenium(offer, uas.get(uaNumber), param, offerList);
@@ -208,7 +210,7 @@ public class MainInterface extends JFrame implements ActionListener {
                     last_allocation_id = ChangeAwsIp.bindIp2Instance();
                     ChangeAwsIp.describeAddresses(Ips, last_allocation_id);
                 }
-                ExcelImport.exportExcel(offerList, param.getTypeOffer());
+                ReadTxt.writeFileContext(Collections.singletonList(offerList.toString()), param.getTypeOffer());
             } catch (Exception e) {
                 e.printStackTrace();
                 textBlock.append(e.getMessage());
