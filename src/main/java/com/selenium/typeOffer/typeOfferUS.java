@@ -2,6 +2,7 @@ package com.selenium.typeOffer;
 
 import org.openqa.selenium.*;
 import com.selenium.pojo.Offer;
+import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
 import java.util.Random;
@@ -806,15 +807,21 @@ public class typeOfferUS {
         try {
             webDriver.findElement(new By.ByName("ship-first-name")).sendKeys(offer.getName());
             webDriver.findElement(new By.ByName("ship-last-name")).sendKeys(offer.getLastName());
-            webDriver.findElement(new By.ByName("ship-phone")).sendKeys(offer.getPhone());
+            if (offer.getPhone().startsWith("1")) {
+                webDriver.findElement(new By.ByName("ship-phone")).sendKeys(offer.getPhone().substring(1));
+            } else {
+                webDriver.findElement(new By.ByName("ship-phone")).sendKeys(offer.getPhone());
+            }
             webDriver.findElement(new By.ByName("ship-email")).sendKeys(offer.getEmail());
             webDriver.findElement(new By.ByName("ship-address")).sendKeys(offer.getAddress());
             webDriver.findElement(new By.ByName("ship-city")).sendKeys(offer.getCountry());
             webDriver.findElement(new By.ByName("ship-zip-code")).sendKeys(offer.getPostcode());
             webDriver.findElement(new By.ByName("ship-state")).sendKeys(offer.getState());
-            webDriver.findElement(new By.ByName("ship-check-terms")).click();
+            Actions build = new Actions(webDriver);
+            WebElement element = webDriver.findElement(new By.ByName("ship-check-terms"));
+            build.moveToElement(element).moveByOffset(6, 0).click().build().perform();
             Thread.sleep(2000);
-            webDriver.findElement(new By.ByCssSelector("span.checkmark")).click();
+            webDriver.findElement(new By.ById("ship-form-button")).click();
             Thread.sleep(5000);
             webDriver.findElement(new By.ByName("bill-card-number")).click();
             webDriver.findElement(new By.ByName("bill-card-number")).sendKeys(offer.getCardNumber().substring(1));

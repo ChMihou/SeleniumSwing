@@ -38,6 +38,13 @@ public class Selenium {
                         .build();
                 webDriver = new ChromeDriver(service, capabilities);
             } else {
+                // 创建HashMap类的一个对象
+                Map<String, Object> prefs = new HashMap<String, Object>();
+
+                // 设置提醒的设置，2表示block
+                prefs.put("profile.default_content_setting_values.notifications", 2);
+                prefs.put("profile.default_content_setting_values.images", 2);
+                options.setExperimentalOption("prefs", prefs);
                 options.addArguments("User-Agent=" + ua);
                 webDriver = new ChromeDriver(options);
             }
@@ -104,7 +111,7 @@ public class Selenium {
                 typeOfferUK.UniversalType10(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 143067) {
                 typeOfferUS.UniversalType18(webDriver, offer, offerList);
-            } else if (param.getTypeOffer() == 140974) {
+            } else if (param.getTypeOffer() == 140974 || param.getTypeOffer() == 146463) {
                 typeOfferUS.UniversalType19(webDriver, offer, offerList);
             }
         }
