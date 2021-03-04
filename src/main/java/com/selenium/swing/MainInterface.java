@@ -1,28 +1,18 @@
 package com.selenium.swing;
 
-import com.selenium.pojo.Offer;
-import com.selenium.untils.*;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
-import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MainInterface extends JFrame implements ActionListener {
 
-    //生产环境
-    public final static String FILEPATH = "C:\\Users\\Administrator\\Desktop\\TestUtils\\user.xls";
-    public final static String PATH = "C:\\Users\\Administrator\\Desktop\\TestUtils\\User-Agent.txt";
-    //测试环境
-//    public final static String FILEPATH = "D:\\user.xls";
-//    public final static String PATH = "D:\\User-Agent.txt";
     JPanel jp1, jp2, jp3, jp4, jp5;     //面板
     JLabel labelTitle;      //标题
     JLabel labelOfferId, labelURL, labelBlock;       //提示
@@ -30,6 +20,7 @@ public class MainInterface extends JFrame implements ActionListener {
     JTextField textOfferUrl;                            //输入OfferUrl
     JTextArea textBlock;
     JButton buttonEnter, buttonReset, buttonFlush;                        //测试按扭，重置按钮
+
 
     //构造
     public MainInterface() {
@@ -42,6 +33,14 @@ public class MainInterface extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);   //设置关闭窗口同时关闭JVM
         this.setVisible(true);                          //设置为窗口可见
     }
+
+    private ExecutorService service = Executors.newCachedThreadPool(new ThreadFactory() {
+
+        @Override
+        public Thread newThread(Runnable test) {
+            return new Thread(test, "output");
+        }
+    });
 
     //设置窗口组件
     void init() {
@@ -140,12 +139,19 @@ public class MainInterface extends JFrame implements ActionListener {
 
 
     //监视器
+    @Override
     public void actionPerformed(ActionEvent e) {
 
-        //如果点击了登录按钮
+        //如果点击了测试按钮
         if (e.getSource() == buttonEnter) {
             try {
-                testOffer();        //调用方法判断账户密码
+                //开启新的线程 避免影响gui界面卡顿
+                service.submit(new Runnable() {
+                    @Override
+                    public void run() {
+                        testOffer();        //调用方法判断账户密码
+                    }
+                });
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
@@ -154,11 +160,10 @@ public class MainInterface extends JFrame implements ActionListener {
             clear();
         }
         if (e.getSource() == buttonFlush) {
-            textBlock.repaint();
+            textBlock.paintImmediately(textBlock.getBounds());
         }
 
     }
-
 
     public void testOffer() {
         //如果账户密码正确
@@ -178,44 +183,7 @@ public class MainInterface extends JFrame implements ActionListener {
                     JOptionPane.WARNING_MESSAGE);
             clear();
         } else {
-            try {
-                int i = 1;
-                List<Offer> offerList = new ArrayList<>();
-                String last_allocation_id;
-                List<String> Ips = new ArrayList<>();
-                Offer param = new Offer();
-                param.setTypeOffer(Integer.valueOf(textOfferId.getText()));
-                param.setUrl(textOfferUrl.getText());
-                Random random = new Random();
-                List<Offer> offers = ExcelImport.importExcelAction(FILEPATH);
-                java.util.List<String> uas = ReadTxt.readTxt(PATH);
-                last_allocation_id = ChangeAwsIp.bindIp2Instance();
-                ChangeAwsIp.describeAddresses(Ips, last_allocation_id);
-                Ips.add(getIp.getV4IP());
-                for (Offer offer : offers) {
-                    int uaNumber = Math.abs(random.nextInt(uas.size()));
-                    System.out.println();
-                    System.out.println("Fake browser access:" + uas.get(uaNumber));
-                    System.out.println("Fake identity login" + offer.toString());
-                    Selenium.selenium(offer, uas.get(uaNumber), param, offerList);
-                    textBlock.append("IP:" + Ips.get(Ips.size() - 1));
-                    textBlock.append("     OfferId:" + param.getTypeOffer());
-                    textBlock.append("     CardNumber:" + offer.getCardNumber());
-                    textBlock.append("     循环已经" + i++ + "次");
-                    if (last_allocation_id != null && !last_allocation_id.equals("")) {
-                        ChangeAwsIp.freedIp(last_allocation_id);
-                        textBlock.append("     释放IP:" + Ips.get(Ips.size() - 1));
-                    }
-                    textBlock.validate();
-                    last_allocation_id = ChangeAwsIp.bindIp2Instance();
-                    ChangeAwsIp.describeAddresses(Ips, last_allocation_id);
-                }
-                ReadTxt.writeFileContext(Collections.singletonList(offerList.toString()), param.getTypeOffer());
-            } catch (Exception e) {
-                e.printStackTrace();
-                textBlock.append(e.getMessage());
-                textBlock.repaint();
-            }
+            testReady.testStart(textOfferId, textOfferUrl, textBlock);
         }
     }
 
