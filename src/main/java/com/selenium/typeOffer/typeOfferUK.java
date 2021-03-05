@@ -411,6 +411,7 @@ public class typeOfferUK {
             Thread.sleep(2000);
             webDriver.findElement(new By.ByName("submit")).click();
             Thread.sleep(5000);
+            webDriver.findElement(new By.ByName("cardnumber")).sendKeys(offer.getCardNumber().substring(1));
             if (offer.getMonth().length() == 1) {
                 webDriver.findElement(new By.ByName("monthexpiredate")).sendKeys("0" + offer.getMonth());
             } else {

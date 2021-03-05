@@ -5,7 +5,6 @@ import com.selenium.untils.*;
 
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -57,7 +56,7 @@ public class testReady {
                 last_allocation_id = ChangeAwsIp.bindIp2Instance();
                 ChangeAwsIp.describeAddresses(Ips, last_allocation_id);
             }
-            ReadTxt.writeFileContext(Collections.singletonList(offerList.toString()), param.getTypeOffer());
+            ReadTxt.writeFileContext(offerList, param.getTypeOffer());
         } catch (Exception e) {
             e.printStackTrace();
             textBlock.append(e.getMessage());

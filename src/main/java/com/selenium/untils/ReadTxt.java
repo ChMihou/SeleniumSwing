@@ -1,5 +1,7 @@
 package com.selenium.untils;
 
+import com.selenium.pojo.Offer;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
@@ -28,20 +30,28 @@ public final class ReadTxt {
         return list;
     }
 
-    public static void writeFileContext(List<String> strings, int param) throws Exception {
+    public static void writeFileContext(List<Offer> strings, int param) throws Exception {
+
+        //测试环境
+//        String ctxPath = "C:\\Users\\Admin\\Desktop\\cmh";
+        //生产环境
         String ctxPath = "C:\\Users\\Administrator\\Desktop\\cmh";
-        String name = new SimpleDateFormat("ddHHmmss").format(new Date());
-        String fileName = "Offer:" + name + ".txt";
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");//设置日期格式
+        String fileName = "Offer-" + param + "-" + df.format(new Date()) + ".txt";
         String bizPath = "files";
         String nowday = new SimpleDateFormat("yyyyMMdd").format(new Date());
         File file = new File(ctxPath + File.separator + bizPath + File.separator + nowday);
+        File offerfile = new File(ctxPath + File.separator + bizPath + File.separator + nowday + File.separator + fileName);
         //如果没有文件就创建
         if (!file.isFile()) {
-            file.createNewFile();
+            file.mkdirs();
         }
-        BufferedWriter writer = new BufferedWriter(new FileWriter(file.getPath() + File.separator + fileName + param));
-        for (String l : strings) {
-            writer.write(l + "\r\n");
+        if (!offerfile.exists()) {
+            offerfile.createNewFile();
+        }
+        BufferedWriter writer = new BufferedWriter(new FileWriter(file.getPath() + File.separator + fileName));
+        for (Offer l : strings) {
+            writer.write(l.toString() + "\r\n");
         }
         writer.close();
     }
