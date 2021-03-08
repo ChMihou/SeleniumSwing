@@ -121,6 +121,8 @@ public class Selenium {
                 typeOfferUK.UniversalType11(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 146557) {
                 typeOfferUS.UniversalType21(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 146558) {
+                typeOfferUS.UniversalType27(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 146559) {
                 typeOfferUS.UniversalType22(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 146610) {
@@ -131,6 +133,10 @@ public class Selenium {
                 typeOfferUS.UniversalType21(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 146772 || param.getTypeOffer() == 146867) {
                 typeOfferUS.UniversalType25(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 146909) {
+                typeOfferUS.UniversalType26(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 146854) {
+                typeOfferUS.UniversalType24(webDriver, offer, offerList);
             }
         }
     }
