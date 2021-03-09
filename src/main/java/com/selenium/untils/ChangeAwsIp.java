@@ -14,8 +14,8 @@ public class ChangeAwsIp {
      */
     public static String bindIp2Instance() {
         //美国实例的Id
-        String instance_id = "i-023a94458ad80f3f0";          //offertest
-//        String instance_id = "i-02c8e4245e11e7aad";        //offertest3
+//        String instance_id = "i-023a94458ad80f3f0";          //offertest
+        String instance_id = "i-02c8e4245e11e7aad";        //offertest3
         final AmazonEC2 ec2 = AmazonEC2ClientBuilder.defaultClient();
 
         AllocateAddressRequest allocate_request = new AllocateAddressRequest()
