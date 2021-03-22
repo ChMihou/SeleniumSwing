@@ -1,5 +1,6 @@
 package com.selenium.untils;
 
+import com.selenium.typeOffer.typeOfferFR;
 import com.selenium.typeOffer.typeOfferUK;
 import com.selenium.typeOffer.typeOfferUS;
 import org.openqa.selenium.WebDriver;
@@ -30,7 +31,8 @@ public class Selenium {
                 typeOfferUS.UniversalType(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 145017 || param.getTypeOffer() == 145013) {
                 typeOfferUS.UniversalType2(webDriver, offer, offerList);
-            } else if (param.getTypeOffer() == 144869 || param.getTypeOffer() == 145815 || param.getTypeOffer() == 144868 || param.getTypeOffer() == 144435 || param.getTypeOffer() == 144096 || param.getTypeOffer() == 144489) {
+            } else if (param.getTypeOffer() == 144869 || param.getTypeOffer() == 145815 || param.getTypeOffer() == 144868
+                    || param.getTypeOffer() == 144435) {
                 typeOfferUS.UniversalType3(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 145372 || param.getTypeOffer() == 145371) {
                 typeOfferUS.UniversalType5(webDriver, offer, offerList);
@@ -50,7 +52,8 @@ public class Selenium {
                 typeOfferUS.UniversalType12(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 146011 || param.getTypeOffer() == 145605) {
                 typeOfferUK.UniversalType4(webDriver, offer, offerList);
-            } else if (param.getTypeOffer() == 146012 || param.getTypeOffer() == 146013 || param.getTypeOffer() == 146014 || param.getTypeOffer() == 146015) {
+            } else if (param.getTypeOffer() == 146012 || param.getTypeOffer() == 146013 || param.getTypeOffer() == 146014
+                    || param.getTypeOffer() == 146015) {
                 typeOfferUS.UniversalType13(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 146024 || param.getTypeOffer() == 146023) {
                 typeOfferUK.UniversalType5(webDriver, offer, offerList);
@@ -76,44 +79,50 @@ public class Selenium {
                 typeOfferUK.UniversalType10(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 143067) {
                 typeOfferUS.UniversalType18(webDriver, offer, offerList);
-            } else if (param.getTypeOffer() == 140974 || param.getTypeOffer() == 146463 || param.getTypeOffer() == 146954) {
+            } else if (param.getTypeOffer() == 140974 || param.getTypeOffer() == 146463 || param.getTypeOffer() == 146954
+                    || param.getTypeOffer() == 146714) {
                 typeOfferUS.UniversalType19(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 146510) {
                 typeOfferUS.UniversalType20(webDriver, offer, offerList);
-            } else if (param.getTypeOffer() == 146468) {
+            } else if (param.getTypeOffer() == 146468 || param.getTypeOffer() == 147490) {
                 typeOfferUS.UniversalType13(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 146612) {
                 typeOfferUK.UniversalType11(webDriver, offer, offerList);
-            } else if (param.getTypeOffer() == 146557) {
-                typeOfferUS.UniversalType21(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 146557 || param.getTypeOffer() == 146608) {
+                typeOfferUS.UniversalType28(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 146558) {
                 typeOfferUS.UniversalType27(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 146559) {
                 typeOfferUS.UniversalType22(webDriver, offer, offerList);
-            } else if (param.getTypeOffer() == 146610) {
+            } else if (param.getTypeOffer() == 146610 || param.getTypeOffer() == 147716 || param.getTypeOffer() == 147159
+                    || param.getTypeOffer() == 146158 || param.getTypeOffer() == 147157 || param.getTypeOffer() == 146958) {
                 typeOfferUS.UniversalType23(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 146780 || param.getTypeOffer() == 146662) {
                 typeOfferUK.UniversalType12(webDriver, offer, offerList);
-            } else if (param.getTypeOffer() == 146451 || param.getTypeOffer() == 146452) {
+            } else if (param.getTypeOffer() == 146451 || param.getTypeOffer() == 146452 || param.getTypeOffer() == 146607) {
                 typeOfferUS.UniversalType21(webDriver, offer, offerList);
-            } else if (param.getTypeOffer() == 146772 || param.getTypeOffer() == 146867) {
+            } else if (param.getTypeOffer() == 146772 || param.getTypeOffer() == 144096 || param.getTypeOffer() == 144489
+                    || param.getTypeOffer() == 146867 || param.getTypeOffer() == 146588 || param.getTypeOffer() == 146587) {
                 typeOfferUS.UniversalType25(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 146909) {
                 typeOfferUS.UniversalType26(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 146854) {
                 typeOfferUS.UniversalType24(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 146961) {
+                typeOfferFR.UniversalType1(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 146959) {
+                typeOfferFR.UniversalType2(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 147441) {
+                typeOfferUS.UniversalType29(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 147650) {
+                typeOfferUS.UniversalType31(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 147390) {
+                typeOfferUS.UniversalType32(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 147389||param.getTypeOffer() == 147934) {
+                typeOfferUS.UniversalType33(webDriver, offer, offerList);
+            } else if (param.getTypeOffer() == 147198) {
+                typeOfferUS.UniversalType34(webDriver, offer, offerList);
             }
-        }
-    }
-
-    public static String getIp() {
-        try {
-            InetAddress ia = InetAddress.getLocalHost();
-            return ia.getHostAddress();
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return "500";
         }
     }
 }

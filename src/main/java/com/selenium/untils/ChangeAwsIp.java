@@ -12,10 +12,20 @@ public class ChangeAwsIp {
     /**
      * @return 返回弹性IP的分配Id
      */
-    public static String bindIp2Instance() {
+    public static String bindIp2Instance(String instance_id) {
         //美国实例的Id
-//        String instance_id = "i-023a94458ad80f3f0";          //offertest
-        String instance_id = "i-02c8e4245e11e7aad";        //offertest3
+        if (instance_id.equals("US-offertest-1")) {
+            instance_id = "i-023a94458ad80f3f0";          //offertest
+        } else if (instance_id.equals("US-offertest-2")) {
+            instance_id = "i-02c8e4245e11e7aad";        //offertest2
+        } else if (instance_id.equals("US-offertest-3")) {
+            instance_id = "i-02e99e974b53a9337";        //offertest3
+        } else if (instance_id.equals("US-offertest-5")) {
+            instance_id = "i-050d85bf72b554f07";        //offertest5
+        } else if (instance_id.equals("FR-offertest-1")) {
+//        法国实例ID
+            instance_id = "i-090577af0c38c7c9d";          //offertestfr
+        }
         final AmazonEC2 ec2 = AmazonEC2ClientBuilder.defaultClient();
 
         AllocateAddressRequest allocate_request = new AllocateAddressRequest()

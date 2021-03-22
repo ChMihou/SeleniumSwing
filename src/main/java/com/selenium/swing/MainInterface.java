@@ -19,12 +19,13 @@ import java.util.regex.Pattern;
 
 public class MainInterface extends JFrame implements ActionListener {
 
-    JPanel jp1, jp2, jp3, jp4, jp5;     //面板
+    JPanel jp1, jp2, jp3, jp4, jp5, jp6;     //面板
     JLabel labelTitle;      //标题
-    JLabel labelOfferId, labelURL, labelBlock;       //提示
+    JLabel labelOfferId, labelURL, labelBlock, labelServer;       //提示
     JTextField textOfferId;                  //输入OfferId
     JTextField textOfferUrl;                            //输入OfferUrl
     JTextArea textBlock;
+    JComboBox<String> textSelect;                        //选择下拉框
     JButton buttonEnter, buttonReset, buttonFlush, buttonStop;                        //测试按扭，重置按钮
     public static int flag = 0;       //终止线程标量
 
@@ -59,6 +60,7 @@ public class MainInterface extends JFrame implements ActionListener {
         //设置面板
         jp1 = new JPanel();
         jp2 = new JPanel();
+        jp6 = new JPanel();
         jp3 = new JPanel();
         jp4 = new JPanel();
         jp5 = new JPanel();
@@ -67,6 +69,8 @@ public class MainInterface extends JFrame implements ActionListener {
         labelTitle.setFont(fontTitle);
 
         //设置Label
+        labelServer = new JLabel("Server:");
+        labelServer.setFont(fontLabel);
         labelOfferId = new JLabel("OfferId:                                                     ");
         labelOfferId.setFont(fontLabel);
         labelURL = new JLabel("OfferUrl：                                                   ");
@@ -77,11 +81,18 @@ public class MainInterface extends JFrame implements ActionListener {
 
         //设置JTextField
         textOfferId = new JTextField(50);
-        textOfferUrl = new JTextField("https://m.bolomobi.com/c/n/145013/321?cid={CLICK_ID}&sc={SOURCE}", 50);
+        textOfferUrl = new JTextField("https://m.bolomobi.com/c/n/145793/1884?cid={CLICK_ID}&sc={SOURCE}", 50);
         //设置白板显示信息
         textBlock = new JTextArea(6, 50);
         //设置自动换行输出信息
         textBlock.setLineWrap(true);
+        //测试服务器
+        textSelect = new JComboBox<String>();
+        textSelect.addItem("US-offertest-1");
+        textSelect.addItem("US-offertest-2");
+        textSelect.addItem("US-offertest-3");
+        textSelect.addItem("US-offertest-5");
+        textSelect.addItem("FR-offertest-1");
         //设置按钮
         buttonEnter = new JButton(" 测试开始  ");
         //重置按钮
@@ -91,10 +102,14 @@ public class MainInterface extends JFrame implements ActionListener {
         //强制暂停线程按钮
         buttonStop = new JButton("  暂停  ");
         //设置布局
-        this.setLayout(new GridLayout(6, 1));   //网格式布局
+        this.setLayout(new GridLayout(7, 1));   //网格式布局
 
         //添加各个组件
         jp1.add(labelTitle);
+
+        jp6.add(labelServer);
+
+        jp6.add(textSelect);
 
         jp2.add(labelOfferId);
 
@@ -118,8 +133,9 @@ public class MainInterface extends JFrame implements ActionListener {
 
         jp5.add(buttonStop);
 
-
         this.add(jp1);
+
+        this.add(jp6);
         this.add(jp2);
         this.add(jp3);
         this.add(jp4);
@@ -171,6 +187,8 @@ public class MainInterface extends JFrame implements ActionListener {
         }
         if (e.getSource() == buttonReset) {
             clear();
+            textOfferUrl = new JTextField("https://m.bolomobi.com/c/n/145793/1884?cid={CLICK_ID}&sc={SOURCE}", 50);
+            jp3.add(textOfferUrl);
         }
         if (e.getSource() == buttonFlush) {
             textBlock.paintImmediately(textBlock.getBounds());
@@ -199,7 +217,7 @@ public class MainInterface extends JFrame implements ActionListener {
                     JOptionPane.WARNING_MESSAGE);
             clear();
         } else {
-            testStart(textOfferId, textOfferUrl, textBlock);
+            testStart(textOfferId, textOfferUrl, textBlock, textSelect);
         }
     }
 
@@ -218,7 +236,7 @@ public class MainInterface extends JFrame implements ActionListener {
         try {
             bigStr = new BigDecimal(str).toString();
         } catch (Exception e) {
-            return false;//异常 说明包含非数字。
+            return false;           //异常 说明包含非数字。
         }
 
         Matcher isNum = pattern.matcher(bigStr); // matcher是全匹配
@@ -238,7 +256,8 @@ public class MainInterface extends JFrame implements ActionListener {
 
     public static void testStart(JTextField textOfferId,
                                  JTextField textOfferUrl,
-                                 JTextArea textBlock) {
+                                 JTextArea textBlock,
+                                 JComboBox textSelect) {
         try {
             int i = 1;
             java.util.List<Offer> offerList = new ArrayList<>();
@@ -250,13 +269,10 @@ public class MainInterface extends JFrame implements ActionListener {
             Random random = new Random();
             List<Offer> offers = ExcelImport.importExcelAction(FILEPATH);
             java.util.List<String> uas = ReadTxt.readTxt(PATH);
-            last_allocation_id = ChangeAwsIp.bindIp2Instance();
+            last_allocation_id = ChangeAwsIp.bindIp2Instance(textSelect.getSelectedItem().toString());
             ChangeAwsIp.describeAddresses(Ips, last_allocation_id);
             Ips.add(getIp.getV4IP());
             for (Offer offer : offers) {
-                if (flag == 1) {
-                    break;
-                }
                 int uaNumber = Math.abs(random.nextInt(uas.size()));
                 System.out.println();
                 System.out.println("Fake browser access:" + uas.get(uaNumber));
@@ -275,7 +291,10 @@ public class MainInterface extends JFrame implements ActionListener {
                     //强行将信息输入text框内
                     textBlock.paintImmediately(textBlock.getBounds());
                 }
-                last_allocation_id = ChangeAwsIp.bindIp2Instance();
+                if (flag == 1) {
+                    break;
+                }
+                last_allocation_id = ChangeAwsIp.bindIp2Instance(textSelect.getSelectedItem().toString());
                 ChangeAwsIp.describeAddresses(Ips, last_allocation_id);
             }
             ReadTxt.writeFileContext(offerList, param.getTypeOffer());
