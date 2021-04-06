@@ -22,9 +22,14 @@ public class ChangeAwsIp {
             instance_id = "i-02e99e974b53a9337";        //offertest3
         } else if (instance_id.equals("US-offertest-5")) {
             instance_id = "i-050d85bf72b554f07";        //offertest5
-        } else if (instance_id.equals("FR-offertest-1")) {
+        } else if (instance_id.equals("FR-offertest-2")) {
 //        法国实例ID
-            instance_id = "i-090577af0c38c7c9d";          //offertestfr
+            instance_id = "i-090577af0c38c7c9d";          //offertestfr002
+        } else if (instance_id.equals("FR-offertest-3")) {
+//        法国实例ID
+            instance_id = "i-0024ed46a2f73bb2b";          //offertestfr003
+        } else if (instance_id.equals("CA-offertest-2")) {
+            instance_id = "i-043c6b6c7b4adec2e"; ///offertestca003
         }
         final AmazonEC2 ec2 = AmazonEC2ClientBuilder.defaultClient();
 

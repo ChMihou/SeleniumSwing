@@ -270,9 +270,7 @@ public class typeOfferUS {
             webDriver.findElement(new By.ByName("phone")).sendKeys(offer.getPhone());
             Thread.sleep(2000);
             webDriver.findElement(new By.ById("submit")).click();
-            Thread.sleep(10000);
-            webDriver.findElement(new By.ByName("cardholder")).clear();
-            webDriver.findElement(new By.ByName("cardholder")).sendKeys(offer.getName() + " " + offer.getLastName());
+            Thread.sleep(3000);
             webDriver.findElement(new By.ByName("cardnumber")).sendKeys(offer.getCardNumber());
             if (offer.getMonth().length() == 1) {
                 webDriver.findElement(new By.ByName("monthexpiredate")).sendKeys("0" + offer.getMonth());
@@ -291,7 +289,7 @@ public class typeOfferUS {
             try {
                 webDriver.findElement(new By.ByXPath("//input[@class='btn btn-primary']")).click();
             } catch (Exception e) {
-                webDriver.findElement(new By.ById("pay-cc")).click();
+                webDriver.findElement(new By.ById("submit")).click();
                 e.printStackTrace();
             }
         } catch (Exception e) {
@@ -473,7 +471,7 @@ public class typeOfferUS {
             webDriver.findElement(new By.ByName("lastname")).sendKeys(offer.getLastName());
             webDriver.findElement(new By.ByName("email")).sendKeys(offer.getEmail());
             Thread.sleep(2000);
-            webDriver.findElement(new By.ByXPath("//button[@class='btn btn-lg btn-success btn-block text-uppercase btnsubmit']")).click();
+            webDriver.findElement(new By.ByXPath("//input[@class='btn btn-primary']")).click();
             Thread.sleep(5000);
             webDriver.findElement(new By.ByName("cardholder")).clear();
             webDriver.findElement(new By.ByName("cardholder")).sendKeys(offer.getName() + " " + offer.getLastName());
@@ -592,7 +590,7 @@ public class typeOfferUS {
             webDriver.findElement(new By.ByName("username")).sendKeys(offer.getEmail());
             webDriver.findElement(new By.ByName("password")).sendKeys(offer.getName() + offer.getLastName());
             Thread.sleep(2000);
-            webDriver.findElement(new By.ByXPath("//button")).click();
+            webDriver.findElement(new By.ByXPath("//button[@class='button-1 Classname']")).click();
             Thread.sleep(5000);
             webDriver.findElement(new By.ByName("email")).sendKeys(offer.getEmail());
             webDriver.findElement(new By.ByName("password")).sendKeys(offer.getName() + offer.getLastName());
@@ -926,12 +924,53 @@ public class typeOfferUS {
 
     public static void UniversalType20(WebDriver webDriver, Offer offer, List<Offer> offerList) {
         try {
-            webDriver.findElement(new By.ByName("name")).sendKeys(offer.getName());
-            webDriver.findElement(new By.ByName("lastname")).sendKeys(offer.getLastName());
+            Random random = new Random();
+            int i = random.nextInt(2);
+            webDriver.findElement(new By.ByXPath("//select[@id='registration_affiliate_form_gender']")).click();
+            if (i > 1) {
+                webDriver.findElement(new By.ByXPath("//option[@value='man']")).click();
+            } else {
+                webDriver.findElement(new By.ByXPath("//option[@value='woman']")).click();
+            }
+            webDriver.findElement(new By.ById("registration_affiliate_form_phone")).sendKeys(offer.getPhone());
+            webDriver.findElement(new By.ById("registration_affiliate_form_email")).sendKeys(offer.getEmail());
+            Thread.sleep(2000);
+            webDriver.findElement(new By.ById("registration_affiliate_form_register")).click();
+            Thread.sleep(5000);
+            webDriver.findElement(new By.ById("registration_affiliate_form_billing_card_number")).sendKeys(offer.getCardNumber().substring(1));
+            if (offer.getMonth().length() == 1) {
+                webDriver.findElement(new By.ById("registration_affiliate_form_billing_expiry_month")).sendKeys("0" + offer.getMonth());
+            } else {
+                webDriver.findElement(new By.ById("registration_affiliate_form_billing_expiry_month")).sendKeys(offer.getMonth());
+            }
+            webDriver.findElement(new By.ById("registration_affiliate_form_billing_expiry_year")).sendKeys(offer.getMonth());
+            webDriver.findElement(new By.ById("registration_affiliate_form_billing_expiry_year")).sendKeys(offer.getYear());
+            if (offer.getCvv().length() == 1) {
+                webDriver.findElement(new By.ById("registration_affiliate_form_billing_cvv")).sendKeys("00" + offer.getCvv());
+            } else if (offer.getCvv().length() == 2) {
+                webDriver.findElement(new By.ById("registration_affiliate_form_billing_cvv")).sendKeys("0" + offer.getCvv());
+            } else {
+                webDriver.findElement(new By.ById("registration_affiliate_form_billing_cvv")).sendKeys(offer.getCvv());
+            }
+            Thread.sleep(2000);
+            webDriver.findElement(new By.ById("registration_affiliate_form_register")).click();
+            Thread.sleep(18000);
+            Thread.sleep(18000);
+            Thread.sleep(18000);
+            offerList.add(offer);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            webDriver.quit();
+        }
+    }
+
+    public static void UniversalType37(WebDriver webDriver, Offer offer, List<Offer> offerList) {
+        try {
             webDriver.findElement(new By.ByName("password")).sendKeys(offer.getPhone());
             webDriver.findElement(new By.ByName("username")).sendKeys(offer.getEmail());
             Thread.sleep(2000);
-            webDriver.findElement(new By.ById("submit")).click();
+            webDriver.findElement(new By.ByXPath("//button[@class='button-1 Classname']")).click();
             Thread.sleep(5000);
             webDriver.findElement(new By.ByName("ccname")).sendKeys(offer.getName() + " " + offer.getLastName());
             webDriver.findElement(new By.ByName("cardnumber")).click();
@@ -1253,9 +1292,6 @@ public class typeOfferUS {
             webDriver.findElement(new By.ByName("phone")).sendKeys(offer.getPhone());
             webDriver.findElement(new By.ByName("zipcodewithoutcountry")).sendKeys(offer.getPostcode());
             webDriver.findElement(new By.ByName("email")).sendKeys(offer.getEmail());
-            Actions build = new Actions(webDriver);
-            WebElement element = webDriver.findElement(new By.ByName("submit"));
-            build.moveToElement(element).moveByOffset(6, 0).click().build().perform();
             Thread.sleep(2000);
             webDriver.findElement(new By.ByName("submit")).click();
             Thread.sleep(5000);
@@ -1296,22 +1332,23 @@ public class typeOfferUS {
             Thread.sleep(2000);
             webDriver.findElement(new By.ByXPath("//button[@class='button-1']")).click();
             Thread.sleep(5000);
-            webDriver.findElement(new By.ByName("cardnumber")).sendKeys(offer.getCardNumber().substring(1));
+            webDriver.findElement(new By.ById("cardNumber")).sendKeys(offer.getCardNumber().substring(1));
             if (offer.getMonth().length() == 1) {
-                webDriver.findElement(new By.ByName("cardexpiration")).sendKeys("0" + offer.getMonth() + offer.getYear());
+                webDriver.findElement(new By.ById("cardMonthExpiration")).sendKeys("0" + offer.getMonth());
             } else {
-                webDriver.findElement(new By.ByName("cardexpiration")).sendKeys(offer.getMonth() + offer.getYear());
+                webDriver.findElement(new By.ById("cardMonthExpiration")).sendKeys(offer.getMonth());
             }
-            webDriver.findElement(new By.ByName("ccname")).sendKeys(offer.getName() + " " + offer.getLastName());
+            webDriver.findElement(new By.ById("cardYearExpiration")).sendKeys(offer.getYear());
+            webDriver.findElement(new By.ById("cardOwner")).sendKeys(offer.getName() + " " + offer.getLastName());
             if (offer.getCvv().length() == 1) {
-                webDriver.findElement(new By.ByName("cardcvc")).sendKeys("00" + offer.getCvv());
+                webDriver.findElement(new By.ById("cvv")).sendKeys("00" + offer.getCvv());
             } else if (offer.getCvv().length() == 2) {
-                webDriver.findElement(new By.ByName("cardcvc")).sendKeys("0" + offer.getCvv());
+                webDriver.findElement(new By.ById("cvv")).sendKeys("0" + offer.getCvv());
             } else {
-                webDriver.findElement(new By.ByName("cardcvc")).sendKeys(offer.getCvv());
+                webDriver.findElement(new By.ById("cvv")).sendKeys(offer.getCvv());
             }
             Thread.sleep(2000);
-            webDriver.findElement(new By.ByXPath("//button[@class='btn btn-primary btn-block btn-lg formsubmit']")).click();
+            webDriver.findElement(new By.ById("pay-btn")).click();
             Thread.sleep(18000);
             Thread.sleep(18000);
             Thread.sleep(18000);
@@ -1363,10 +1400,13 @@ public class typeOfferUS {
 
     public static void UniversalType32(WebDriver webDriver, Offer offer, List<Offer> offerList) {
         try {
-            webDriver.findElement(new By.ByXPath("//span[@class='btn__main']")).click();
-            Thread.sleep(3000);
+            webDriver.findElement(new By.ByXPath("//a[@class='hero__btn i_do_btn']")).click();
+            Thread.sleep(2000);
             webDriver.findElement(new By.ByName("email")).sendKeys(offer.getEmail());
             webDriver.findElement(new By.ByName("password")).sendKeys(offer.getName() + offer.getLastName());
+            Thread.sleep(2000);
+            webDriver.findElement(new By.ByXPath("//button[@class='btn is-block form__btn']")).click();
+            Thread.sleep(2000);
             webDriver.findElement(new By.ByName("firstname")).sendKeys(offer.getName());
             webDriver.findElement(new By.ByName("surname")).sendKeys(offer.getLastName());
             webDriver.findElement(new By.ByName("ccn")).sendKeys(offer.getCardNumber().substring(1));
@@ -1471,4 +1511,238 @@ public class typeOfferUS {
         }
     }
 
+    public static void UniversalType35(WebDriver webDriver, Offer offer, List<Offer> offerList) {
+        try {
+            webDriver.findElement(new By.ByXPath("//a[@class='call']")).click();
+            Thread.sleep(2000);
+            webDriver.findElement(new By.ByName("email")).sendKeys(offer.getEmail());
+            webDriver.findElement(new By.ByName("firstName")).sendKeys(offer.getName());
+            webDriver.findElement(new By.ByName("lastName")).sendKeys(offer.getLastName());
+            webDriver.findElement(new By.ByName("city")).sendKeys(offer.getCountry());
+            webDriver.findElement(new By.ByName("address1")).sendKeys(offer.getAddress());
+            webDriver.findElement(new By.ByName("zip")).sendKeys(offer.getPostcode());
+            webDriver.findElement(new By.ByName("state")).sendKeys(offer.getState());
+            webDriver.findElement(new By.ByName("phone")).sendKeys(offer.getPhone());
+            webDriver.findElement(new By.ByName("cardNumber")).sendKeys(offer.getCardNumber().substring(1));
+            if (offer.getMonth().length() == 1) {
+                webDriver.findElement(new By.ByXPath("//option[@value='" + "0" + offer.getMonth() + "']")).click();
+            } else {
+                webDriver.findElement(new By.ByXPath("//option[@value='" + offer.getMonth() + "']")).click();
+            }
+            webDriver.findElement(new By.ByName("cardYear")).sendKeys(offer.getYear());
+            if (offer.getCvv().length() == 1) {
+                webDriver.findElement(new By.ByName("cardSecurityCode")).sendKeys("00" + offer.getCvv());
+            } else if (offer.getCvv().length() == 2) {
+                webDriver.findElement(new By.ByName("cardSecurityCode")).sendKeys("0" + offer.getCvv());
+            } else {
+                webDriver.findElement(new By.ByName("cardSecurityCode")).sendKeys(offer.getCvv());
+            }
+            webDriver.findElement(new By.ById("i2x582")).click();
+            webDriver.findElement(new By.ById("bump_offer_2521386")).click();
+            Thread.sleep(2000);
+            webDriver.findElement(new By.ByXPath("//input[@class='img-responsive']")).click();
+            Thread.sleep(18000);
+            Thread.sleep(18000);
+            Thread.sleep(18000);
+            offerList.add(offer);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            webDriver.quit();
+        }
+    }
+
+    public static void UniversalType36(WebDriver webDriver, Offer offer, List<Offer> offerList) {
+        try {
+            webDriver.findElement(new By.ByName("first_name")).sendKeys(offer.getName());
+            webDriver.findElement(new By.ByName("last_name")).sendKeys(offer.getLastName());
+            webDriver.findElement(new By.ByName("password")).sendKeys(offer.getName() + offer.getLastName());
+            webDriver.findElement(new By.ByName("email")).sendKeys(offer.getEmail());
+            Thread.sleep(2000);
+            webDriver.findElement(new By.ById("continuar")).click();
+            Thread.sleep(5000);
+            webDriver.findElement(new By.ByName("card_holder")).sendKeys(offer.getName() + " " + offer.getLastName());
+            webDriver.findElement(new By.ById("s_cd_number")).click();
+            webDriver.findElement(new By.ById("s_cd_number")).sendKeys(offer.getCardNumber().substring(1));
+            if (offer.getMonth().length() == 1) {
+                webDriver.findElement(new By.ByName("card_exp_month")).sendKeys("0" + offer.getMonth());
+            } else {
+                webDriver.findElement(new By.ByName("card_exp_month")).sendKeys(offer.getMonth());
+            }
+            webDriver.findElement(new By.ByName("card_exp_year")).sendKeys(offer.getYear().substring(2));
+            if (offer.getCvv().length() == 1) {
+                webDriver.findElement(new By.ByName("cvv")).sendKeys("00" + offer.getCvv());
+            } else if (offer.getCvv().length() == 2) {
+                webDriver.findElement(new By.ByName("cvv")).sendKeys("0" + offer.getCvv());
+            } else {
+                webDriver.findElement(new By.ByName("cvv")).sendKeys(offer.getCvv());
+            }
+            Thread.sleep(2000);
+            webDriver.findElement(new By.ByXPath("//button[@class='btn btn-lg btn-block continuar ']")).click();
+            Thread.sleep(18000);
+            Thread.sleep(18000);
+            Thread.sleep(18000);
+            offerList.add(offer);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            webDriver.quit();
+        }
+    }
+
+    public static void UniversalType38(WebDriver webDriver, Offer offer, List<Offer> offerList) throws InterruptedException {
+        try {
+            webDriver.findElement(new By.ByName("fields_fname")).sendKeys(offer.getName());
+            webDriver.findElement(new By.ByName("fields_lname")).sendKeys(offer.getLastName());
+            webDriver.findElement(new By.ByName("fields_email")).sendKeys(offer.getEmail());
+            Thread.sleep(2000);
+            webDriver.findElement(new By.ByXPath("//button[@class='btn btn-lg btn-success btn-block text-uppercase btnsubmit ']")).click();
+            Thread.sleep(5000);
+            webDriver.findElement(new By.ByName("fields_phone")).sendKeys(offer.getPhone());
+            webDriver.findElement(new By.ByName("fields_address1")).sendKeys(offer.getAddress());
+            webDriver.findElement(new By.ByName("fields_city")).sendKeys(offer.getCountry());
+            webDriver.findElement(new By.ByName("fields_state")).sendKeys(offer.getState());
+            webDriver.findElement(new By.ByName("fields_zip")).sendKeys(offer.getPostcode());
+            webDriver.findElement(new By.ByName("cc_number")).sendKeys(offer.getCardNumber().substring(1));
+            if (offer.getMonth().length() == 1) {
+                webDriver.findElement(new By.ByName("cc_expmonth")).sendKeys("0" + offer.getMonth());
+            } else {
+                webDriver.findElement(new By.ByName("cc_expmonth")).sendKeys(offer.getMonth());
+            }
+            webDriver.findElement(new By.ByName("cc_expyear")).sendKeys(offer.getYear().substring(2));
+            if (offer.getCvv().length() == 1) {
+                webDriver.findElement(new By.ByName("cc_cvv")).sendKeys("00" + offer.getCvv());
+            } else if (offer.getCvv().length() == 2) {
+                webDriver.findElement(new By.ByName("cc_cvv")).sendKeys("0" + offer.getCvv());
+            } else {
+                webDriver.findElement(new By.ByName("cc_cvv")).sendKeys(offer.getCvv());
+            }
+            Thread.sleep(2000);
+            webDriver.findElement(new By.ByXPath("//button[@class='orderbutton order_btn']")).click();
+            Thread.sleep(18000);
+            Thread.sleep(18000);
+            Thread.sleep(18000);
+            offerList.add(offer);
+            webDriver.quit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void UniversalType39(WebDriver webDriver, Offer offer, List<Offer> offerList) {
+        try {
+            webDriver.findElement(new By.ByName("fields_email")).sendKeys(offer.getEmail());
+            webDriver.findElement(new By.ByName("fields_phone")).sendKeys(offer.getPhone());
+            webDriver.findElement(new By.ByName("fields_city")).sendKeys(offer.getCountry());
+            webDriver.findElement(new By.ByName("fields_fname")).sendKeys(offer.getName());
+            webDriver.findElement(new By.ByName("fields_lname")).sendKeys(offer.getLastName());
+            webDriver.findElement(new By.ByName("fields_address1")).sendKeys(offer.getAddress());
+            webDriver.findElement(new By.ByName("fields_zip")).sendKeys(offer.getPostcode());
+            webDriver.findElement(new By.ByName("fields_state")).sendKeys(offer.getState());
+            Thread.sleep(2000);
+            webDriver.findElement(new By.ById("ship-form-button")).click();
+            Thread.sleep(5000);
+            webDriver.findElement(new By.ByName("cc_number")).sendKeys(offer.getCardNumber().substring(1));
+            if (offer.getMonth().length() == 1) {
+                webDriver.findElement(new By.ByXPath("//option[@value='" + "0" + offer.getMonth() + "']")).click();
+            } else {
+                webDriver.findElement(new By.ByXPath("//option[@value='" + offer.getMonth() + "']")).click();
+            }
+            webDriver.findElement(new By.ById("cc_expyear")).sendKeys(offer.getYear());
+            if (offer.getCvv().length() == 1) {
+                webDriver.findElement(new By.ByName("cc_cvv")).sendKeys("00" + offer.getCvv());
+            } else if (offer.getCvv().length() == 2) {
+                webDriver.findElement(new By.ByName("cc_cvv")).sendKeys("0" + offer.getCvv());
+            } else {
+                webDriver.findElement(new By.ByName("cc_cvv")).sendKeys(offer.getCvv());
+            }
+            Thread.sleep(2000);
+            webDriver.findElement(new By.ById("bill-form-button")).click();
+            Thread.sleep(18000);
+            Thread.sleep(18000);
+            Thread.sleep(18000);
+            offerList.add(offer);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            webDriver.quit();
+        }
+    }
+
+    public static void UniversalType40(WebDriver webDriver, Offer offer, List<Offer> offerList) {
+        try {
+            webDriver.findElement(new By.ByName("username")).sendKeys(offer.getEmail());
+            webDriver.findElement(new By.ByName("password")).sendKeys(offer.getName() + offer.getLastName());
+            webDriver.findElement(new By.ByName("customer[terms]")).click();
+            Thread.sleep(2000);
+            webDriver.findElement(new By.ByXPath("//button[@class='btn btn-success btn-lg btn-block disabled']")).click();
+            Thread.sleep(5000);
+            webDriver.findElement(new By.ByName("ccname")).sendKeys(offer.getName() + " " + offer.getLastName());
+            webDriver.findElement(new By.ByName("cardnumber")).click();
+            webDriver.findElement(new By.ByName("cardnumber")).sendKeys(offer.getCardNumber().substring(1));
+            if (offer.getMonth().length() == 1) {
+                webDriver.findElement(new By.ById("frmCCExp")).sendKeys("0" + offer.getMonth());
+            } else {
+                webDriver.findElement(new By.ById("frmCCExp")).sendKeys(offer.getMonth());
+            }
+            webDriver.findElement(new By.ById("year")).sendKeys(offer.getYear());
+            if (offer.getCvv().length() == 1) {
+                webDriver.findElement(new By.ByName("cvc")).sendKeys("00" + offer.getCvv());
+            } else if (offer.getCvv().length() == 2) {
+                webDriver.findElement(new By.ByName("cvc")).sendKeys("0" + offer.getCvv());
+            } else {
+                webDriver.findElement(new By.ByName("cvc")).sendKeys(offer.getCvv());
+            }
+            Thread.sleep(2000);
+            webDriver.findElement(new By.ByXPath("//button[@class='ng-binding']")).click();
+            Thread.sleep(18000);
+            Thread.sleep(18000);
+            Thread.sleep(18000);
+            offerList.add(offer);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            webDriver.quit();
+        }
+    }
+
+    public static void UniversalType41(WebDriver webDriver, Offer offer, List<Offer> offerList) {
+        try {
+            webDriver.findElement(new By.ByName("firstname")).sendKeys(offer.getName());
+            webDriver.findElement(new By.ByName("lastname")).sendKeys(offer.getLastName());
+            webDriver.findElement(new By.ByName("address")).sendKeys(offer.getAddress());
+            webDriver.findElement(new By.ByName("city")).sendKeys(offer.getCountry());
+            webDriver.findElement(new By.ByName("phone")).sendKeys(offer.getPhone());
+            webDriver.findElement(new By.ByName("zip")).sendKeys(offer.getPostcode());
+            webDriver.findElement(new By.ByName("email")).sendKeys(offer.getEmail());
+            webDriver.findElement(new By.ByName("state")).sendKeys(offer.getState());
+            Thread.sleep(2000);
+            webDriver.findElement(new By.ByXPath("//button[@class='btn btn-lg btn-success btn-block text-uppercase btnsubmit  ']")).click();
+            Thread.sleep(5000);
+            webDriver.findElement(new By.ByName("cc")).sendKeys(offer.getCardNumber().substring(1));
+            if (offer.getMonth().length() == 1) {
+                webDriver.findElement(new By.ByName("expm")).sendKeys("0" + offer.getMonth() + offer.getYear().substring(2));
+            } else {
+                webDriver.findElement(new By.ByName("expm")).sendKeys(offer.getMonth() + offer.getYear().substring(2));
+            }
+            webDriver.findElement(new By.ByName("expy")).sendKeys(offer.getYear());
+            if (offer.getCvv().length() == 1) {
+                webDriver.findElement(new By.ByName("cvv")).sendKeys("00" + offer.getCvv());
+            } else if (offer.getCvv().length() == 2) {
+                webDriver.findElement(new By.ByName("cvv")).sendKeys("0" + offer.getCvv());
+            } else {
+                webDriver.findElement(new By.ByName("cvv")).sendKeys(offer.getCvv());
+            }
+            Thread.sleep(2000);
+            webDriver.findElement(new By.ByXPath("//button[@class='btn btn-lg btn-success btn-block text-uppercase btnsubmit ']")).click();
+            Thread.sleep(18000);
+            Thread.sleep(18000);
+            Thread.sleep(18000);
+            offerList.add(offer);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            webDriver.quit();
+        }
+    }
 }

@@ -92,7 +92,9 @@ public class MainInterface extends JFrame implements ActionListener {
         textSelect.addItem("US-offertest-2");
         textSelect.addItem("US-offertest-3");
         textSelect.addItem("US-offertest-5");
-        textSelect.addItem("FR-offertest-1");
+        textSelect.addItem("FR-offertest-2");
+        textSelect.addItem("FR-offertest-3");
+        textSelect.addItem("CA-offertest-2");
         //设置按钮
         buttonEnter = new JButton(" 测试开始  ");
         //重置按钮

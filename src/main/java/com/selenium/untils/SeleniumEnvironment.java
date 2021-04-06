@@ -32,7 +32,7 @@ public class SeleniumEnvironment {
         // 创建HashMap类的一个对象
         Map<String, Object> prefs = new HashMap<>();
 
-        // 设置提醒的设置，2表示block
+        // 设置提醒的设置，2表示block,无图浏览
         prefs.put("profile.default_content_setting_values.notifications", 2);
         prefs.put("profile.default_content_setting_values.images", 2);
         options.setExperimentalOption("prefs", prefs);
