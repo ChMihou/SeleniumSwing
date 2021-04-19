@@ -7,7 +7,7 @@ import java.net.URL;
 public class getIp {
 
     public static void main(String args[]) throws Exception {
-
+        System.out.println(getV4IP());
 
     }
 

@@ -87,7 +87,7 @@ public class Selenium {
                     || param.getTypeOffer() == 146714 || param.getTypeOffer() == 148005 || param.getTypeOffer() == 148006
                     || param.getTypeOffer() == 148014 || param.getTypeOffer() == 147971 || param.getTypeOffer() == 147972
                     || param.getTypeOffer() == 148063 || param.getTypeOffer() == 148609 || param.getTypeOffer() == 149190
-                    || param.getTypeOffer() == 149189
+                    || param.getTypeOffer() == 149189|| param.getTypeOffer() == 149617
             ) {
                 typeOfferUS.UniversalType19(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 146510) {

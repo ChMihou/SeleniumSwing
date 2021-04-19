@@ -60,7 +60,7 @@ public class ChangeAwsIp {
     /**
      * 打印弹性IP的描述信息
      */
-    public static void describeAddresses(List<String> ips, String allocation_id) {
+    public static String describeAddresses(List<String> ips, String allocation_id, String piblicIp) {
         final AmazonEC2 ec2 = AmazonEC2ClientBuilder.defaultClient();
 
         DescribeAddressesResult response = ec2.describeAddresses();
@@ -79,9 +79,12 @@ public class ChangeAwsIp {
             ips.add(address.getPublicIp());
             if (address.getAllocationId().equals(allocation_id)) {
                 ips.add(address.getPublicIp());
-                break;
+            }
+            if (address.getPublicIp().equals(piblicIp)) {
+                return address.getAllocationId();
             }
         }
+        return null;
     }
 
     /**
