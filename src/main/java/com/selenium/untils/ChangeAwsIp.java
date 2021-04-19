@@ -74,7 +74,8 @@ public class ChangeAwsIp {
                     address.getPublicIp(),
                     address.getDomain(),
                     address.getAllocationId(),
-                    address.getNetworkInterfaceId());
+                    address.getNetworkInterfaceId()
+            );
             ips.add(address.getPublicIp());
             if (address.getAllocationId().equals(allocation_id)) {
                 ips.add(address.getPublicIp());
@@ -97,5 +98,18 @@ public class ChangeAwsIp {
 
         System.out.printf(
                 "Successfully released elastic IP address %s", alloc_id);
+    }
+
+    public static void freedIpfromIp(String Ip) {
+
+        final AmazonEC2 ec2 = AmazonEC2ClientBuilder.defaultClient();
+
+        ReleaseAddressRequest request = new ReleaseAddressRequest()
+                .withPublicIp(Ip);
+
+        ReleaseAddressResult response = ec2.releaseAddress(request);
+
+        System.out.printf(
+                "Successfully released elastic IP address %s", Ip);
     }
 }

@@ -37,7 +37,7 @@ public class MainInterface extends JFrame implements ActionListener {
         this.setResizable(false);                       //设置窗口大小不可调节
         this.setTitle("Offer测试");                       //设置窗口标题
         this.setLocationRelativeTo(null);               //在屏幕中间显示(居中显示)
-        this.setBounds(500, 200, 600, 800);
+        this.setBounds(0, 0, 600, 800);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);   //设置关闭窗口同时关闭JVM
         this.setVisible(true);                          //设置为窗口可见
     }
@@ -73,7 +73,7 @@ public class MainInterface extends JFrame implements ActionListener {
         labelServer.setFont(fontLabel);
         labelOfferId = new JLabel("OfferId:                                                     ");
         labelOfferId.setFont(fontLabel);
-        labelURL = new JLabel("OfferUrl：                                                   ");
+        labelURL = new JLabel("  AffiliateId：                                                   ");
         labelURL.setFont(fontLabel);
         labelBlock = new JLabel("目前测试的信息:                                              ");
         labelBlock.setFont(fontLabel);
@@ -81,7 +81,7 @@ public class MainInterface extends JFrame implements ActionListener {
 
         //设置JTextField
         textOfferId = new JTextField(50);
-        textOfferUrl = new JTextField("https://m.bolomobi.com/c/n/145793/1884?cid={CLICK_ID}&sc={SOURCE}", 50);
+        textOfferUrl = new JTextField(50);
         //设置白板显示信息
         textBlock = new JTextArea(5, 50);
         //设置自动换行输出信息
@@ -204,18 +204,18 @@ public class MainInterface extends JFrame implements ActionListener {
     public void testOffer() {
         //如果账户密码正确
         if (textOfferId.getText().isEmpty() && textOfferUrl.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "请输入OfferId和OfferUrl", "提示",
+            JOptionPane.showMessageDialog(null, "请输入OfferId和AffiliateID", "提示",
                     JOptionPane.WARNING_MESSAGE);
-        } else if (textOfferId.getText().isEmpty())      //当同户名为空
+        } else if (textOfferId.getText().isEmpty())      //offerid
         {
             JOptionPane.showMessageDialog(null, "请输入OfferId", "提示",
                     JOptionPane.WARNING_MESSAGE);
-        } else if (textOfferUrl.getText().isEmpty())       //当密码为空
+        } else if (textOfferUrl.getText().isEmpty())       //AffiliateId
         {
-            JOptionPane.showMessageDialog(null, "请输入OfferUrl", "提示",
+            JOptionPane.showMessageDialog(null, "请输入AffiliateId", "提示",
                     JOptionPane.WARNING_MESSAGE);
-        } else if (!isNumeric(textOfferId.getText())) {
-            JOptionPane.showMessageDialog(null, "请输入正确的OfferId", "提示",
+        } else if (!isNumeric(textOfferId.getText()) || !isNumeric(textOfferUrl.getText())) {
+            JOptionPane.showMessageDialog(null, "请输入正确的OfferId和AffiliateId", "提示",
                     JOptionPane.WARNING_MESSAGE);
             clear();
         } else {
@@ -267,10 +267,11 @@ public class MainInterface extends JFrame implements ActionListener {
             java.util.List<String> Ips = new ArrayList<>();
             Offer param = new Offer();
             param.setTypeOffer(Integer.valueOf(textOfferId.getText()));
-            param.setUrl(textOfferUrl.getText());
+            param.setUrl("https://m.bolomobi.com/c/n/" + textOfferId.getText() + "/" + textOfferUrl.getText() + "?cid={CLICK_ID}&sc={SOURCE}");
             Random random = new Random();
             List<Offer> offers = ExcelImport.importExcelAction(FILEPATH);
             java.util.List<String> uas = ReadTxt.readTxt(PATH);
+            ChangeAwsIp.freedIpfromIp(getIp.getV4IP());
             last_allocation_id = ChangeAwsIp.bindIp2Instance(textSelect.getSelectedItem().toString());
             ChangeAwsIp.describeAddresses(Ips, last_allocation_id);
             Ips.add(getIp.getV4IP());
