@@ -39,7 +39,7 @@ public class Selenium {
                 typeOfferUS.UniversalType3(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 145372 || param.getTypeOffer() == 145371) {
                 typeOfferUS.UniversalType5(webDriver, offer, offerList);
-            } else if (param.getTypeOffer() == 145376 || param.getTypeOffer() == 145375) {
+            } else if (param.getTypeOffer() == 145376 || param.getTypeOffer() == 145375|| param.getTypeOffer() == 149827) {
                 typeOfferUS.UniversalType4(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 144778 || param.getTypeOffer() == 146844 || param.getTypeOffer() == 147555
                     || param.getTypeOffer() == 147554 || param.getTypeOffer() == 147553) {
@@ -177,6 +177,8 @@ public class Selenium {
                 typeOfferCa.UniversalType5(webDriver, offer, offerList);
             } else if (param.getTypeOffer() == 148140) {
                 typeOfferCa.UniversalType8(webDriver, offer, offerList);
+            }else if (param.getTypeOffer() == 149803) {
+                typeOfferUS.UniversalType43(webDriver, offer, offerList);
             }
         }
     }

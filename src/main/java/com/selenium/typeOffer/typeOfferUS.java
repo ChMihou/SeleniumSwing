@@ -1746,6 +1746,46 @@ public class typeOfferUS {
         }
     }
 
+    public static void UniversalType43(WebDriver webDriver, Offer offer, List<Offer> offerList) {
+        try {
+            webDriver.findElement(new By.ByName("firstName")).sendKeys(offer.getName());
+            webDriver.findElement(new By.ByName("emailAddress")).sendKeys(offer.getEmail());
+            webDriver.findElement(new By.ById("imt4o")).click();
+            Thread.sleep(2000);
+            webDriver.findElement(new By.ByXPath("//button[@class='btn btn-primary btn-font-size re-fk-lazy fk-disable-lazy']")).click();
+            Thread.sleep(5000);
+            webDriver.findElement(new By.ByName("lastName")).sendKeys(offer.getLastName());
+            webDriver.findElement(new By.ByName("address1")).sendKeys(offer.getAddress());
+            webDriver.findElement(new By.ByName("city")).sendKeys(offer.getCountry());
+            webDriver.findElement(new By.ByName("state")).sendKeys(offer.getState());
+            webDriver.findElement(new By.ByName("postalCode")).sendKeys(offer.getPostcode());
+            webDriver.findElement(new By.ById("iip136")).sendKeys(offer.getCardNumber());
+            if (offer.getMonth().length() == 1) {
+                webDriver.findElement(new By.ByName("cardDate")).sendKeys("0" + offer.getMonth() + offer.getYear().substring(2));
+            } else {
+                webDriver.findElement(new By.ByName("cardDate")).sendKeys(offer.getMonth() + offer.getYear().substring(2));
+            }
+            if (offer.getCvv().length() == 1) {
+                webDriver.findElement(new By.ById("ihrfkm")).sendKeys("00" + offer.getCvv());
+            } else if (offer.getCvv().length() == 2) {
+                webDriver.findElement(new By.ById("ihrfkm")).sendKeys("0" + offer.getCvv());
+            } else {
+                webDriver.findElement(new By.ById("ihrfkm")).sendKeys(offer.getCvv());
+            }
+            webDriver.findElement(new By.ById("is2vyv")).click();
+            Thread.sleep(2000);
+            webDriver.findElement(new By.ByXPath("//button[@class='btn btn-primary']")).click();
+            Thread.sleep(18000);
+            Thread.sleep(18000);
+            Thread.sleep(18000);
+            offerList.add(offer);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            webDriver.quit();
+        }
+    }
+
     public static void UniversalType41(WebDriver webDriver, Offer offer, List<Offer> offerList) {
         try {
             webDriver.findElement(new By.ByName("firstname")).sendKeys(offer.getName() + " " + offer.getLastName());

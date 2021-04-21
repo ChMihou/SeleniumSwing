@@ -154,7 +154,7 @@ public class MainInterface extends JFrame implements ActionListener {
 
     //设置窗口背景
     void setBackground() {
-        ImageIcon background = new ImageIcon("bb.jpg");   //根目录下文件名
+        ImageIcon background = new ImageIcon("");   //根目录下文件名
         JLabel label = new JLabel(background);
         label.setBounds(0, 0, background.getIconWidth(), background.getIconHeight());
 
@@ -214,7 +214,7 @@ public class MainInterface extends JFrame implements ActionListener {
         {
             JOptionPane.showMessageDialog(null, "请输入AffiliateId", "提示",
                     JOptionPane.WARNING_MESSAGE);
-        } else if (!isNumeric(textOfferId.getText()) || !isNumeric(textOfferUrl.getText())) {
+        } else if (!isNumeric(textOfferId.getText().replaceAll(" ", "")) || !isNumeric(textOfferUrl.getText().replaceAll(" ", ""))) {
             JOptionPane.showMessageDialog(null, "请输入正确的OfferId和AffiliateId", "提示",
                     JOptionPane.WARNING_MESSAGE);
             clear();
@@ -271,12 +271,13 @@ public class MainInterface extends JFrame implements ActionListener {
             Random random = new Random();
             List<Offer> offers = ExcelImport.importExcelAction(FILEPATH);
             java.util.List<String> uas = ReadTxt.readTxt(PATH);
-            String first_allocation_id = ChangeAwsIp.describeAddresses(Ips, null, getIp.getV4IP());
+            String first_allocation_id = ChangeAwsIp.describeAddresses(getIp.getV4IP());
             if (first_allocation_id != null) {
                 ChangeAwsIp.freedIp(first_allocation_id);
             }
             last_allocation_id = ChangeAwsIp.bindIp2Instance(textSelect.getSelectedItem().toString());
-            ChangeAwsIp.describeAddresses(Ips, last_allocation_id, getIp.getV4IP());
+            ChangeAwsIp.describeAddresses(getIp.getV4IP());
+            Ips.add(getIp.getV4IP());
             for (Offer offer : offers) {
                 int uaNumber = Math.abs(random.nextInt(uas.size()));
                 System.out.println();
@@ -300,7 +301,7 @@ public class MainInterface extends JFrame implements ActionListener {
                     break;
                 }
                 last_allocation_id = ChangeAwsIp.bindIp2Instance(textSelect.getSelectedItem().toString());
-                ChangeAwsIp.describeAddresses(Ips, last_allocation_id, Ips.get(Ips.size() - 1));
+                Ips.add(getIp.getV4IP());
             }
             ReadTxt.writeFileContext(offerList, param.getTypeOffer());
         } catch (Exception e) {
