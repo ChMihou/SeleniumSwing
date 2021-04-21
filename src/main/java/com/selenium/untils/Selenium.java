@@ -1,21 +1,13 @@
 package com.selenium.untils;
 
+import com.selenium.pojo.Offer;
 import com.selenium.typeOffer.typeOfferCa;
 import com.selenium.typeOffer.typeOfferFR;
 import com.selenium.typeOffer.typeOfferUK;
 import com.selenium.typeOffer.typeOfferUS;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import com.selenium.pojo.Offer;
 
-import java.net.InetAddress;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 public class Selenium {
 
